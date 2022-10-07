@@ -1,0 +1,4 @@
+//https://mantine.dev/theming/colors/ - Mantine color palette use this when custom
+
+ui - layout/appshell, welcome, login, signup, dashboard, query, result
+app - add router
