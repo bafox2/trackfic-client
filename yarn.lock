@@ -1613,7 +1613,7 @@
   dependencies:
     "@mantine/utils" "5.5.1"
 
-"@mantine/form@^5.5.4":
+"@mantine/form@^5.5.1":
   "integrity" "sha512-SKfVBmJGykwmEfMpRacXmhC2pwaKiR3fGPHppT0w1Gy/DDQx9BpwR7XgCcnPJFoR70CUZrVo5J/aglxPOIGSoA=="
   "resolved" "https://registry.npmjs.org/@mantine/form/-/form-5.5.4.tgz"
   "version" "5.5.4"
