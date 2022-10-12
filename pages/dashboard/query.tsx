@@ -7,10 +7,13 @@ import {
 	PasswordInput,
 	Code,
 } from "@mantine/core";
+import { Cron } from "react-js-cron-mantine";
 import { useForm } from "@mantine/form";
+import "react-js-cron/dist/styles.css";
 
 export default function Demo() {
 	const [active, setActive] = useState(0);
+	const [value, setValue] = useState("30 5 * * 1,6");
 
 	const form = useForm({
 		initialValues: {
@@ -104,6 +107,7 @@ export default function Demo() {
 						placeholder="GitHub"
 						{...form.getInputProps("github")}
 					/>
+					<Cron value={value} setValue={setValue} />
 				</Stepper.Step>
 				<Stepper.Step label="Final step" description="Confirmation">
 					<TextInput
