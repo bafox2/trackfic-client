@@ -23,33 +23,39 @@ import React, { ReactNode } from "react";
 import { NextPage } from "next";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
+import { userAgent } from "next/server";
 
 interface Props {
 	children?: ReactNode;
 	data?: any;
 	data1?: any;
+	fallbackData?: any;
 	// any props that come into the component
 }
 
 interface User {
-	_id: number;
-	name: string;
-	email: string;
-	createdAt: string;
-	updatedAt: string;
-	__v: number;
-	session: string;
-	iat: number;
-	exp: number;
+	user: {
+		_id: number;
+		name: string;
+		email: string;
+		createdAt: string;
+		updatedAt: string;
+		__v: number;
+		session: string;
+		iat: number;
+		exp: number;
+	};
 }
 
-const AppLayout: NextPage = ({ children, data1 }: Props) => {
+const AppLayout: NextPage<{ fallbackData: User }> = ({
+	children,
+	fallbackData,
+}: Props) => {
 	const router = useRouter();
-	const { data, error } = useSWR<User>(
+	const { data, error } = useSWR<User | null>(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
-		{
-			fetcher,
-		}
+		fetcher,
+		{ fallbackData }
 	);
 
 	return (
@@ -70,8 +76,7 @@ const AppLayout: NextPage = ({ children, data1 }: Props) => {
 						style={{ display: "flex", alignItems: "center", height: "100%" }}
 					>
 						<Text size="lg" weight="bolder">
-							data {data?.name}
-							{data1?.name}
+							{/* data {data?.user.name} */}
 						</Text>
 
 						<Link href="/" passHref>
@@ -120,16 +125,15 @@ const AppLayout: NextPage = ({ children, data1 }: Props) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const data1 = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}/api/me`, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const data = await fetcher(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
+		context.req.headers
+	);
+	return {
+		props: {
+			fallbackData: data,
 		},
-		credentials: "include",
-	});
-
-	return { props: { user: data1 } };
+	};
 };
-
 export default AppLayout;
