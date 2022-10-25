@@ -17,15 +17,41 @@ import {
 } from "@tabler/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { AppContext } from "next/app";
+import { GetServerSideProps } from "next";
 import React, { ReactNode } from "react";
+import { NextPage } from "next";
+import useSWR from "swr";
+import fetcher from "../../utils/fetcher";
 
 interface Props {
 	children?: ReactNode;
+	data?: any;
+	data1?: any;
 	// any props that come into the component
 }
 
-const AppLayout = ({ children }: Props) => {
+interface User {
+	_id: number;
+	name: string;
+	email: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+	session: string;
+	iat: number;
+	exp: number;
+}
+
+const AppLayout: NextPage = ({ children, data1 }: Props) => {
 	const router = useRouter();
+	const { data, error } = useSWR<User>(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
+		{
+			fetcher,
+		}
+	);
+
 	return (
 		<AppShell
 			sx={(theme) => ({
@@ -44,7 +70,8 @@ const AppLayout = ({ children }: Props) => {
 						style={{ display: "flex", alignItems: "center", height: "100%" }}
 					>
 						<Text size="lg" weight="bolder">
-							Trackfic
+							data {data?.name}
+							{data1?.name}
 						</Text>
 
 						<Link href="/" passHref>
@@ -91,6 +118,18 @@ const AppLayout = ({ children }: Props) => {
 			{children}
 		</AppShell>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const data1 = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}/api/me`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		credentials: "include",
+	});
+
+	return { props: { user: data1 } };
 };
 
 export default AppLayout;
