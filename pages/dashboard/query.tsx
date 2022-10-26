@@ -1,131 +1,156 @@
 import { useState } from "react";
-import {
-	Stepper,
-	Button,
-	Group,
-	TextInput,
-	PasswordInput,
-	Code,
-} from "@mantine/core";
+import { Stepper, Button, Group, TextInput, Code, Text } from "@mantine/core";
 import { Cron } from "react-js-cron-mantine";
-import { useForm } from "@mantine/form";
+import { useForm, useController } from "react-hook-form";
+import { object, string, TypeOf } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/router";
 import "react-js-cron/dist/styles.css";
+
+const createTripSchema = object({
+	title: string().min(1, {
+		message: "Email is required",
+	}),
+	description: string(),
+	origin: string().min(1, {
+		message: "Origin is required",
+	}),
+	destination: string().min(1, {
+		message: "Destination is required",
+	}),
+	schedule: string().min(1, {
+		message: "Password is required",
+	}),
+});
+
+type CreateTripSchema = TypeOf<typeof createTripSchema>;
 
 export default function Demo() {
 	const [active, setActive] = useState(0);
-	const [value, setValue] = useState("30 5 * * 1,6");
-
-	const form = useForm({
-		initialValues: {
-			username: "",
-			password: "",
-			name: "",
-			email: "",
-			website: "",
-			github: "",
-		},
-
-		validate: (values) => {
-			if (active === 0) {
-				return {
-					username:
-						values.username.trim().length < 6
-							? "Username must include at least 6 characters"
-							: null,
-					password:
-						values.password.length < 6
-							? "Password must include at least 6 characters"
-							: null,
-				};
-			}
-
-			if (active === 1) {
-				return {
-					name:
-						values.name.trim().length < 2
-							? "Name must include at least 2 characters"
-							: null,
-					email: /^\S+@\S+$/.test(values.email) ? null : "Invalid email",
-				};
-			}
-
-			return {};
-		},
+	const [cronValue, setCronValue] = useState("* * * * *");
+	const router = useRouter();
+	const [tripError, setTripError] = useState();
+	const {
+		register,
+		getValues,
+		control,
+		formState: { errors },
+		handleSubmit,
+	} = useForm<CreateTripSchema>({
+		resolver: zodResolver(createTripSchema),
 	});
+	const { field } = useController({
+		name: "schedule",
+		control,
+		defaultValue: "* * * * *",
+	});
+	const { field: title } = useController({
+		name: "title",
+		control,
+		defaultValue: "",
+	});
+	const { field: description } = useController({
+		name: "description",
+		control,
+		defaultValue: "",
+	});
+	const { field: origin } = useController({
+		name: "origin",
+		control,
+		defaultValue: "",
+	});
+	const { field: destination } = useController({
+		name: "destination",
+		control,
+		defaultValue: "",
+	});
+
+	const onSubmit = async (values: CreateTripSchema) => {
+		console.log(process.env.NEXT_PUBLIC_API_URL);
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/trips/`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(values),
+					credentials: "include",
+				}
+			);
+			const data = await response.json();
+			router.push("/dashboard");
+			console.log(data);
+		} catch (error: any) {
+			setTripError(error.message);
+			console.log(error);
+		}
+	};
 
 	const nextStep = () =>
 		setActive((current) => {
-			if (form.validate().hasErrors) {
-				return current;
-			}
-			return current < 3 ? current + 1 : current;
+			// if (form.validate().hasErrors) {
+			// 	return current;
+			// }
+			return current < 4 ? current + 1 : current;
 		});
 
 	const prevStep = () =>
 		setActive((current) => (current > 0 ? current - 1 : current));
 
+	console.log(getValues(), "getValues");
 	return (
-		<>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<Stepper active={active} breakpoint="sm">
-				<Stepper.Step label="First step" description="Origin">
+				<Stepper.Step label="First step" description="Title">
 					<TextInput
-						label="Username"
-						placeholder="Username"
-						{...form.getInputProps("username")}
+						label="Title"
+						placeholder="Work Commute"
+						size="lg"
+						{...title}
 					/>
-					<PasswordInput
-						mt="md"
-						label="Password"
-						placeholder="Password"
-						{...form.getInputProps("password")}
+					<Text color={"red"}>{errors.title?.message}</Text>
+					<TextInput
+						label="Description"
+						placeholder="Late shift"
+						size="lg"
+						{...description}
 					/>
+					<Text color={"red"}>{errors.description?.message}</Text>
 				</Stepper.Step>
 
-				<Stepper.Step label="Second step" description="Destination">
+				<Stepper.Step label="Second step" description="Locations">
 					<TextInput
-						label="Name"
-						placeholder="Name"
-						{...form.getInputProps("name")}
+						label="Origin"
+						placeholder="42 Wallaby Way, Sydney"
+						size="lg"
+						{...origin}
 					/>
+					<Text color={"red"}>{errors.origin?.message}</Text>
 					<TextInput
-						mt="md"
-						label="Email"
-						placeholder="Email"
-						{...form.getInputProps("email")}
+						label="Destination"
+						placeholder="78 Downing Street, Sydney"
+						size="lg"
+						{...destination}
 					/>
+					<Text color={"red"}>{errors.destination?.message}</Text>
 				</Stepper.Step>
-
 				<Stepper.Step label="Third step" description="Schedule">
-					<TextInput
-						label="Website"
-						placeholder="Website"
-						{...form.getInputProps("website")}
+					<Cron
+						{...field}
+						value={cronValue}
+						setValue={(value: string) => {
+							setCronValue(value);
+							field.onChange(value);
+						}}
 					/>
-					<TextInput
-						mt="md"
-						label="GitHub"
-						placeholder="GitHub"
-						{...form.getInputProps("github")}
-					/>
-					<Cron value={value} setValue={setValue} />
-				</Stepper.Step>
-				<Stepper.Step label="Final step" description="Confirmation">
-					<TextInput
-						label="Website"
-						placeholder="Website"
-						{...form.getInputProps("website")}
-					/>
-					<TextInput
-						mt="md"
-						label="GitHub"
-						placeholder="GitHub"
-						{...form.getInputProps("github")}
-					/>
+					<Text color={"red"}>{errors.schedule?.message}</Text>
 				</Stepper.Step>
 				<Stepper.Completed>
 					Completed! Form values:
 					<Code block mt="xl">
-						{JSON.stringify(form.values, null, 2)}
+						{JSON.stringify(getValues(), null, 2)}
 					</Code>
 				</Stepper.Completed>
 			</Stepper>
@@ -136,8 +161,9 @@ export default function Demo() {
 						Back
 					</Button>
 				)}
+				{tripError && <p>{tripError}</p>}
 				{active !== 3 && <Button onClick={nextStep}>Next step</Button>}
 			</Group>
-		</>
+		</form>
 	);
 }

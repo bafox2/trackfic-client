@@ -100,6 +100,13 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 								active={router.pathname === "/about"}
 							/>
 						</Link>
+						<Link href="/dashboard/query" passHref>
+							<NavLink
+								component="a"
+								label="Qeruy"
+								active={router.pathname === "/about"}
+							/>
+						</Link>
 						<ColorSchemeToggle />
 					</div>
 				</Header>
