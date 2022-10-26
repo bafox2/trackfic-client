@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Stepper, Button, Group, TextInput, Code, Text } from "@mantine/core";
 import { Cron } from "react-js-cron-mantine";
+import "react-js-cron/dist/styles.css";
 import { useForm, useController } from "react-hook-form";
 import { object, string, TypeOf } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
-import "react-js-cron/dist/styles.css";
+import { MapInput } from "../../Components/MapInput/MapInput";
 
 const createTripSchema = object({
 	title: string().min(1, {
@@ -127,6 +128,7 @@ export default function Demo() {
 						size="lg"
 						{...origin}
 					/>
+					<MapInput />
 					<Text color={"red"}>{errors.origin?.message}</Text>
 					<TextInput
 						label="Destination"
@@ -134,6 +136,8 @@ export default function Demo() {
 						size="lg"
 						{...destination}
 					/>
+
+					<MapInput />
 					<Text color={"red"}>{errors.destination?.message}</Text>
 				</Stepper.Step>
 				<Stepper.Step label="Third step" description="Schedule">
