@@ -174,17 +174,16 @@ export default function HomePage({ data }: StatsGroupProps) {
 
 				<div className={classes.inner}>
 					<Title className={classes.title}>
-						Automated AI code reviews for{" "}
+						Google Maps Information{" "}
 						<Text component="span" inherit className={classes.highlight}>
-							any stack
+							Automated
 						</Text>
 					</Title>
 
 					<Container size={640}>
 						<Text size="lg" className={classes.description}>
-							Build more reliable software with AI companion. AI is also trained
-							to detect lazy developers who do nothing and just complain on
-							Twitter.
+							The mental toll of trying to optimize when you schedule things is
+							too hard. Let us do it for you.
 						</Text>
 					</Container>
 
@@ -214,19 +213,19 @@ export default function HomePage({ data }: StatsGroupProps) {
 export const getStaticProps: GetStaticProps = () => {
 	const data = [
 		{
-			title: "Projects",
-			stats: "1,400",
-			description: "Projects are using AI companion",
+			title: "Users",
+			stats: "36",
+			description: "All time users who have made a trip",
 		},
 		{
-			title: "Lines of code",
-			stats: "1.2M",
-			description: "Lines of code are being analyzed",
+			title: "Trips",
+			stats: "102",
+			description: "From Alaska to Florida",
 		},
 		{
-			title: "Developers",
+			title: "Nodes",
 			stats: "1,400",
-			description: "Developers are using AI companion",
+			description: "Data to help you decide when to go",
 		},
 	];
 

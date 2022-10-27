@@ -1,25 +1,32 @@
-import { Title, Text, Anchor } from '@mantine/core';
-import useStyles from './Welcome.styles';
+import { Title, Text, Anchor } from "@mantine/core";
+import useStyles from "./Welcome.styles";
 
 export function Welcome() {
-  const { classes } = useStyles();
+	const { classes } = useStyles();
 
-  return (
-    <>
-      <Title className={classes.title} align="center" mt={100}>
-        Welcome to{' '}
-        <Text inherit variant="gradient" component="span">
-          Mantine
-        </Text>
-      </Title>
-      <Text color="dimmed" align="center" size="lg" sx={{ maxWidth: 580 }} mx="auto" mt="xl">
-        This starter Next.js project includes a minimal setup for server side rendering, if you want
-        to learn more on Mantine + Next.js integration follow{' '}
-        <Anchor href="https://mantine.dev/guides/next/" size="lg">
-          this guide
-        </Anchor>
-        . To get started edit index.tsx file.
-      </Text>
-    </>
-  );
+	return (
+		<>
+			<Title className={classes.title} align="center" mt={100}>
+				Welcome to{" "}
+				<Text inherit variant="gradient" component="span">
+					Trackfic
+				</Text>
+			</Title>
+			<Text
+				color="dimmed"
+				align="center"
+				size="lg"
+				sx={{ maxWidth: 580 }}
+				mx="auto"
+				mt="xl"
+			>
+				This website was created because I was frustrated with the Google Maps
+				information when you were querying for the future. Having a range of 30+
+				minutes for a trip that took 45 minutes on average was no good. I also
+				did not like having to remember when to punch up the information into
+				the app. So I created this website to do it for me. I hope you find it
+				useful too.
+			</Text>
+		</>
+	);
 }

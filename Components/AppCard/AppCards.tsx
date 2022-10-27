@@ -10,8 +10,15 @@ import {
 	IconBrandReact,
 	IconBrandNextjs,
 	IconBrandMantine,
+	IconCalendarTime,
+	IconMap,
+	IconTypography,
+	IconBuildingCircus,
+	IconHexagonLetterE,
+	IconDiamond,
 	IconBrandGoogle,
-	TablerIcon,
+	IconBrandStackoverflow,
+	IconBrandNpm,
 } from "@tabler/icons";
 import { ReactNode } from "react";
 import Link from "next/link";
@@ -52,24 +59,14 @@ export default function appCards() {
 	const { classes } = useStyles();
 
 	const apps = [
-		// React, Typescript, Nextjs, Mantine, Cron, Google Maps, OpenMap, Jest, Express, Mongoose, Zod
-		{
-			title: "Trackfic",
-			description:
-				"Trackfic is a web app that allows you to track your favorite stories on fanfiction.net.",
-			link: "https://trackfic.vercel.app/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
-			icon: IconBrandMantine,
-		},
 		{
 			title: "Cron",
 			description:
 				"Cron is a web app that allows you to schedule tasks to run on a schedule.",
-			link: "https://cron.vercel.app/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			link: "https://www.npmjs.com/package/cron",
+			color1: "#000000",
+			color2: "#FFFFFF",
+			icon: IconCalendarTime,
 		},
 		{
 			title: "OpenMap",
@@ -78,7 +75,7 @@ export default function appCards() {
 			link: "https://openmap.vercel.app/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconMap,
 		},
 		{
 			title: "Mantine",
@@ -87,7 +84,7 @@ export default function appCards() {
 			link: "https://mantine.dev/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconBrandMantine,
 		},
 		{
 			title: "Nextjs",
@@ -96,7 +93,7 @@ export default function appCards() {
 			link: "https://nextjs.org/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconBrandNextjs,
 		},
 		{
 			title: "Typescript",
@@ -105,7 +102,7 @@ export default function appCards() {
 			link: "https://www.typescriptlang.org/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconTypography,
 		},
 		{
 			title: "React",
@@ -123,7 +120,7 @@ export default function appCards() {
 			link: "https://jestjs.io/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconBuildingCircus,
 		},
 		{
 			title: "Express",
@@ -132,7 +129,7 @@ export default function appCards() {
 			link: "https://expressjs.com/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconHexagonLetterE,
 		},
 		{
 			title: "Mongoose",
@@ -150,7 +147,7 @@ export default function appCards() {
 			link: "zohttps://github.com/colinhacks/zod",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconDiamond,
 		},
 		{
 			title: "Google Maps",
@@ -159,7 +156,25 @@ export default function appCards() {
 			link: "https://developers.google.com/maps/documentation/javascript/overview",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconBrandReact,
+			icon: IconBrandGoogle,
+		},
+		{
+			title: "Stack Overflow",
+			description:
+				"Google Maps is a Javascript library that allows you to create interactive maps.",
+			link: "https://developers.google.com/maps/documentation/javascript/overview",
+			color1: "#f5f5f5",
+			color2: "#f5f5f5",
+			icon: IconBrandStackoverflow,
+		},
+		{
+			title: "NPM",
+			description:
+				"Google Maps is a Javascript library that allows you to create interactive maps.",
+			link: "https://developers.google.com/maps/documentation/javascript/overview",
+			color1: "#f5f5f5",
+			color2: "#f5f5f5",
+			icon: IconBrandNpm,
 		},
 	];
 
