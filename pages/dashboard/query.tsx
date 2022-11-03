@@ -24,6 +24,9 @@ const createTripSchema = object({
 	}),
 });
 
+//get the value from the MapInput component
+//what would be different if i had the component in this file
+
 type CreateTripSchema = TypeOf<typeof createTripSchema>;
 
 export default function Demo() {
@@ -45,16 +48,7 @@ export default function Demo() {
 		control,
 		defaultValue: "* * * * *",
 	});
-	const { field: title } = useController({
-		name: "title",
-		control,
-		defaultValue: "",
-	});
-	const { field: description } = useController({
-		name: "description",
-		control,
-		defaultValue: "",
-	});
+
 	const { field: origin } = useController({
 		name: "origin",
 		control,
@@ -97,10 +91,10 @@ export default function Demo() {
 			return current < 4 ? current + 1 : current;
 		});
 
+	console.log(getValues(), "getValues");
 	const prevStep = () =>
 		setActive((current) => (current > 0 ? current - 1 : current));
 
-	console.log(getValues(), "getValues");
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<Stepper active={active} breakpoint="sm">
@@ -109,26 +103,20 @@ export default function Demo() {
 						label="Title"
 						placeholder="Work Commute"
 						size="lg"
-						{...title}
+						{...register("title")}
 					/>
 					<Text color={"red"}>{errors.title?.message}</Text>
 					<TextInput
 						label="Description"
 						placeholder="Late shift"
 						size="lg"
-						{...description}
+						{...register("description")}
 					/>
 					<Text color={"red"}>{errors.description?.message}</Text>
 				</Stepper.Step>
 
 				<Stepper.Step label="Second step" description="Locations">
-					<TextInput
-						label="Origin"
-						placeholder="42 Wallaby Way, Sydney"
-						size="lg"
-						{...origin}
-					/>
-					<MapInput />
+					<MapInput {...origin} />
 					<Text color={"red"}>{errors.origin?.message}</Text>
 					<TextInput
 						label="Destination"

@@ -3,10 +3,12 @@ import { Autocomplete, Loader, AutocompleteItem } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
+import { Controller, useForm } from "react-hook-form";
 
-export function MapInput() {
+export function MapInput(props: any) {
 	//query has windowcleartimeout and timeoutrefcurrent for some reason ?
 	//show a loading spinner when component is loading or debounced
+	//fetcher can't have credentials
 
 	interface Idata {
 		type: string;
@@ -14,7 +16,7 @@ export function MapInput() {
 		features: any[];
 		attribution: string;
 	}
-
+	const { handleSubmit, control } = useForm();
 	const [value, setValue] = useState("");
 	const debouncedValue = useDebouncedValue(value, 1000);
 	const { data, error } = useSWR<Idata | null>(
@@ -32,27 +34,20 @@ export function MapInput() {
 
 	console.log(debouncedValue);
 	return (
-		<Autocomplete
-			label="Search for a location"
-			placeholder="Enter a location"
-			value={value}
-			onChange={setValue}
-			data={items}
-			error={error}
+		<Controller
+			control={control}
+			name="location"
+			render={({ field: { value } }) => (
+				<Autocomplete
+					label="Search for a location"
+					placeholder="Enter a location"
+					name={props.name}
+					value={value}
+					onChange={setValue}
+					data={items}
+					error={error}
+				/>
+			)}
 		/>
 	);
 }
-
-// const { data: countries = [], isValidating } = useSWR(
-//   () => (searchTerm ? `/api/suggestions?value=${searchTerm}` : null),
-//   fetcher
-// )
-
-// try {
-//   const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=pk.eyJ1Ijoic3RoeW1hIiwiYSI6ImNrcnFycDlzNjFxM3Uydm1vMGNxd200amsifQ.aTXBxeiEvrCesxbO8OuFEg&autocomplete=true`;
-//   const response = await fetch(endpoint);
-//   const results = await response.json();
-//   setSuggestions(results?.features);
-// } catch (error) {
-//   console.log("Error fetching data, ", error);
-// }

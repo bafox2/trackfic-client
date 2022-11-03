@@ -76,7 +76,7 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 						style={{ display: "flex", alignItems: "center", height: "100%" }}
 					>
 						<Text size="lg" weight="bolder">
-							{/* data {data?.user.name} */}
+							{data?.user?.name}
 						</Text>
 
 						<Link href="/" passHref>
@@ -103,7 +103,14 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 						<Link href="/dashboard/query" passHref>
 							<NavLink
 								component="a"
-								label="Qeruy"
+								label="Query"
+								active={router.pathname === "/about"}
+							/>
+						</Link>
+						<Link href="/dashboard/query" passHref>
+							<NavLink
+								component="a"
+								label="Dashboard"
 								active={router.pathname === "/about"}
 							/>
 						</Link>

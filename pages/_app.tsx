@@ -27,6 +27,22 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 		});
 	};
 
+	const appLayoutProps = {
+		fallbackData: {
+			user: {
+				_id: 0,
+				name: "Guest",
+				email: "guest@localhost",
+				createdAt: "2021-05-01T00:00:00.000Z",
+				updatedAt: "2021-05-01T00:00:00.000Z",
+				__v: 0,
+				session: "guest",
+				iat: 0,
+				exp: 0,
+			},
+		},
+	};
+
 	return (
 		<>
 			<Head>
@@ -35,7 +51,10 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width"
 				/>
-				<link rel="shortcut icon" href="/favicon.svg" />
+				<link
+					rel="icon"
+					href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>"
+				/>
 			</Head>
 
 			<ColorSchemeProvider
@@ -49,7 +68,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 				>
 					<CustomFonts />
 					<NotificationsProvider>
-						<AppLayout>
+						<AppLayout {...appLayoutProps}>
 							<Component {...pageProps} />
 						</AppLayout>
 					</NotificationsProvider>
