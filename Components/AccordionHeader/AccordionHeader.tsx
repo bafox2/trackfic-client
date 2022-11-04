@@ -1,4 +1,4 @@
-import { Text, Stack, createStyles } from "@mantine/core";
+import { Text, Stack, createStyles, Paper } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
 	header: {
@@ -62,9 +62,12 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 	return (
 		<>
 			<Stack align="flex-start" justify="center" spacing="xs">
-				<Text>{data.description}</Text>
-				<Text>From: {data.origin}</Text>
-				<Text>To: {data.destination}</Text>
+				<Paper shadow="md" radius="md" withBorder={true}>
+					<Text>{data.description}</Text>
+					<Text>From: {data.origin}</Text>
+					<Text>To: {data.destination}</Text>
+					<Text>Schedule: {data.schedule}</Text>
+				</Paper>
 			</Stack>
 		</>
 	);

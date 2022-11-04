@@ -11,6 +11,30 @@ import AccordionTable from "../AccordionTable/AccordionTable";
 //will expect data to be passed as props
 //data will be an aray of objects from the mongoDB find query of user's _id
 
+interface AccordionControllerProps {
+	data: {
+		__v: number;
+		_id: string;
+		createdAt: string;
+		description: string;
+		destination: string;
+		origin: string;
+		schedule: string;
+		title: string;
+		tripNodes: {
+			__v: number;
+			_id: string;
+			createdAt: string;
+			durationGeneral: number;
+			durationNow: number;
+			timeRequested: string;
+			trip: string;
+			updatedAt: string;
+		}[];
+		updatedAt: string;
+		user: string;
+	}[];
+}
 function AccordionControl(props: AccordionControlProps) {
 	return (
 		<Box sx={{ display: "flex", alignItems: "center" }}>
@@ -72,7 +96,9 @@ const dataHeader = {
 	updatedAt: "2021-08-01T00:00:00.000Z",
 };
 
-export default function AccordionController() {
+export default function AccordionController({
+	...props
+}: AccordionControllerProps) {
 	return (
 		<Accordion chevronPosition="left" sx={{ maxWidth: 400 }} mx="auto">
 			<Accordion.Item value="item-3">
