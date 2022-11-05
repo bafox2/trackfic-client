@@ -49,22 +49,11 @@ export default function Demo() {
 		defaultValue: "* * * * *",
 	});
 
-	const { field: origin } = useController({
-		name: "origin",
-		control,
-		defaultValue: "",
-	});
-	const { field: destination } = useController({
-		name: "destination",
-		control,
-		defaultValue: "",
-	});
-
 	const onSubmit = async (values: CreateTripSchema) => {
 		console.log(process.env.NEXT_PUBLIC_API_URL);
 		try {
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/trips/`,
+				`${process.env.NEXT_PUBLIC_API_URL}/api/trips`,
 				{
 					method: "POST",
 					headers: {
@@ -75,8 +64,7 @@ export default function Demo() {
 				}
 			);
 			const data = await response.json();
-			router.push("/dashboard");
-			console.log(data);
+			console.log(data, "data from create trip");
 		} catch (error: any) {
 			setTripError(error.message);
 			console.log(error);
@@ -116,16 +104,20 @@ export default function Demo() {
 				</Stepper.Step>
 
 				<Stepper.Step label="Second step" description="Locations">
-					<MapInput {...origin} />
-					<Text color={"red"}>{errors.origin?.message}</Text>
-					<TextInput
-						label="Destination"
-						placeholder="78 Downing Street, Sydney"
-						size="lg"
-						{...destination}
+					<MapInput
+						placeholder={"42 Wallabee Way Sydney, Austrailia"}
+						label={"Where are you starting?"}
+						control={control}
+						name={"origin"}
 					/>
+					<Text color={"red"}>{errors.origin?.message}</Text>
 
-					<MapInput />
+					<MapInput
+						placeholder={"21 Seasame Street"}
+						name={"destination"}
+						control={control}
+						label={"Where are you going?"}
+					/>
 					<Text color={"red"}>{errors.destination?.message}</Text>
 				</Stepper.Step>
 				<Stepper.Step label="Third step" description="Schedule">
@@ -155,6 +147,7 @@ export default function Demo() {
 				)}
 				{tripError && <p>{tripError}</p>}
 				{active !== 3 && <Button onClick={nextStep}>Next step</Button>}
+				{active === 3 && <Button type="submit">Submit</Button>}
 			</Group>
 		</form>
 	);

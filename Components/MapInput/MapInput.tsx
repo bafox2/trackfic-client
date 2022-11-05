@@ -16,7 +16,6 @@ export function MapInput(props: any) {
 		features: any[];
 		attribution: string;
 	}
-	const { handleSubmit, control } = useForm();
 	const [value, setValue] = useState("");
 	const debouncedValue = useDebouncedValue(value, 1000);
 	const { data, error } = useSWR<Idata | null>(
@@ -30,20 +29,20 @@ export function MapInput(props: any) {
 		if (!data) return [];
 		return data.features.map((place) => place.place_name);
 	}, [data]);
-	console.log(items);
 
-	console.log(debouncedValue);
 	return (
 		<Controller
-			control={control}
-			name="location"
-			render={({ field: { value } }) => (
+			control={props.control}
+			name={props.name}
+			render={({ field: { onChange, value } }) => (
 				<Autocomplete
-					label="Search for a location"
-					placeholder="Enter a location"
-					name={props.name}
+					label={props.label}
+					placeholder={props.placeholder}
 					value={value}
-					onChange={setValue}
+					onChange={(value: string) => {
+						setValue(value);
+						onChange(value);
+					}}
 					data={items}
 					error={error}
 				/>
