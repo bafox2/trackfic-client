@@ -53,9 +53,13 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 }: Props) => {
 	const router = useRouter();
 	let { data, error } = useSWR<User | null>(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
-		fetcher,
-		{ fallbackData }
+		fetcher(
+			`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
+			{
+				contentType: "application/json",
+			},
+			true
+		)
 	);
 
 	const onLogout = async () => {
@@ -73,13 +77,15 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 			);
 			const logoutData = await response.json();
 
-			router.push("/");
 			data = null;
 			console.log(logoutData);
+			router.reload();
 		} catch (error: any) {
 			console.log(error);
 		}
 	};
+
+	console.log(data, "data");
 	return (
 		<AppShell
 			sx={(theme) => ({
@@ -88,7 +94,6 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 						theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
 					width: "100vw",
 					height: "100vh",
-					paddingLeft: "0px",
 				},
 			})}
 			fixed
@@ -101,11 +106,39 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 						<Text size="lg" weight="bolder"></Text>
 						<Link href="/" passHref>
 							<NavLink
+								sx={(theme) => ({
+									":hover": {
+										backgroundColor: "transparent",
+									},
+								})}
 								component="a"
-								label="🚦Trackfic"
+								label={
+									<>
+										<Text
+											sx={() => ({
+												marginLeft: "12px",
+												backgroundColor: "transparent",
+												fontSize: "50px",
+											})}
+										>
+											🚙
+										</Text>
+										<Text
+											sx={() => ({
+												backgroundColor: "transparent",
+												marginBottom: "15px",
+												marginTop: "-20px",
+												fontSize: "20px",
+											})}
+										>
+											Trackfic
+										</Text>
+									</>
+								}
 								active={router.pathname === "/home"}
 							/>
 						</Link>
+						{data?.user?.name}
 						{data?.user?.name ? (
 							<>
 								<Link href="/dashboard" passHref>
@@ -174,14 +207,16 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 			footer={
 				<Footer height={50} p="sm">
 					<Group position="apart" spacing="xl">
-						{/* <Text size="sm">
-							<span style={{ fontWeight: "bolder" }}>Trackfic</span>
-						</Text> */}
 						<Text size="sm">
-							<span style={{ fontWeight: "bolder" }}>bfox © 2022</span>
+							<span>bfox © 2022</span>
+						</Text>
+						<Text size="sm">
+							<span style={{ fontWeight: "bolder" }}>Trackfic</span>
 						</Text>
 						<Link href="https://github.com" passHref>
-							<ActionIcon component={IconBrandGithub}>Next link</ActionIcon>
+							<a target="_blank" rel="noopener noreferrer">
+								<ActionIcon component={IconBrandGithub}>Next link</ActionIcon>
+							</a>
 						</Link>
 					</Group>
 				</Footer>
@@ -195,7 +230,8 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	let data = await fetcher(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
-		context.req.headers
+		context.req.headers,
+		true
 	);
 	return {
 		props: {
