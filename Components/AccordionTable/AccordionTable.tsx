@@ -20,6 +20,7 @@ const useStyles = createStyles((theme) => ({
 		transition: "box-shadow 150ms ease",
 
 		"&::after": {
+			width: "400px",
 			content: '""',
 			position: "absolute",
 			left: 0,
@@ -35,24 +36,6 @@ const useStyles = createStyles((theme) => ({
 
 	th: {
 		padding: "0 !important",
-	},
-
-	control: {
-		width: "100%",
-		padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-
-		"&:hover": {
-			backgroundColor:
-				theme.colorScheme === "dark"
-					? theme.colors.dark[6]
-					: theme.colors.gray[0],
-		},
-	},
-
-	icon: {
-		width: 21,
-		height: 21,
-		borderRadius: 21,
 	},
 }));
 
@@ -86,7 +69,7 @@ export default function TableData({ data }: RowDataNode | any) {
 	if (data.length === 0) {
 		return (
 			<>
-				<Table sx={{ minWidth: 700 }}>
+				<Table sx={{ minWidth: 500 }}>
 					<thead className={cx(classes.header)}>
 						<tr>
 							<th>Date</th>
@@ -116,7 +99,7 @@ export default function TableData({ data }: RowDataNode | any) {
 
 	return (
 		<>
-			<Table sx={{ minWidth: 700 }}>
+			<Table sx={{ minWidth: 500 }}>
 				<thead className={cx(classes.header)}>
 					<tr>
 						<th>Date</th>

@@ -8,8 +8,17 @@ import { IconPlayerPause, IconEdit, IconTrashX } from "@tabler/icons";
 import AccordionHeader from "../AccordionHeader/AccordionHeader";
 import AccordionTable from "../AccordionTable/AccordionTable";
 
-//will expect data to be passed as props
-//data will be an aray of objects from the mongoDB find query of user's _id
+const onPause = (e: Event) => {
+	console.log("onPause", e);
+};
+
+const onEdit = () => {
+	console.log("onEdit");
+};
+
+const onDelete = () => {
+	console.log("onDelete");
+};
 
 interface AccordionControllerProps {
 	data: {
@@ -35,18 +44,17 @@ interface AccordionControllerProps {
 		user: string;
 	}[];
 }
-//this will take the logic for the buttons
 function AccordionControl(props: AccordionControlProps) {
 	return (
 		<Box sx={{ display: "flex", alignItems: "center" }}>
 			<Accordion.Control {...props} />
-			<ActionIcon size="lg">
+			<ActionIcon onClick={(e: any) => onPause(e)} size="lg">
 				<IconPlayerPause size={16} />
 			</ActionIcon>
-			<ActionIcon size="lg">
+			<ActionIcon onClick={onEdit} size="lg">
 				<IconEdit size={16} />
 			</ActionIcon>{" "}
-			<ActionIcon size="lg">
+			<ActionIcon onClick={onDelete} size="lg">
 				<IconTrashX size={16} />
 			</ActionIcon>
 		</Box>
@@ -100,11 +108,9 @@ const dataHeader = {
 export default function AccordionController({
 	data,
 }: any | AccordionControllerProps) {
-	console.log("data", data);
-
 	return (
 		<>
-			<Accordion chevronPosition="left" sx={{ maxWidth: 400 }} mx="auto">
+			<Accordion chevronPosition="left" sx={{ minWidth: 500 }} mx="sm">
 				<Accordion.Item value="item-3">
 					<AccordionControl>{data.title}</AccordionControl>
 					<Accordion.Panel>
