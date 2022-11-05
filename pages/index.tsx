@@ -101,6 +101,7 @@ const useStyles = createStyles((theme) => ({
 			theme.colors[theme.primaryColor][4]
 		} 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
 		padding: theme.spacing.xl * 1.5,
+		marginBottom: theme.spacing.xl * 1.5,
 		borderRadius: theme.radius.md,
 
 		[theme.fn.smallerThan("sm")]: {
