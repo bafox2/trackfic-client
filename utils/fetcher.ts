@@ -1,12 +1,13 @@
 export default async function fetcher<T>(
 	url: string,
-	headers = {}
+	headers = {},
+	credentials: boolean
 ): Promise<T | null> {
 	try {
 		const data = await fetch(url, {
 			method: "GET",
 			headers,
-			credentials: "include",
+			credentials: credentials ? "include" : "omit",
 		});
 		return data.json();
 	} catch (error) {
