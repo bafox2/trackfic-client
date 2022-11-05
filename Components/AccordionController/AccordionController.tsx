@@ -35,6 +35,7 @@ interface AccordionControllerProps {
 		user: string;
 	}[];
 }
+//this will take the logic for the buttons
 function AccordionControl(props: AccordionControlProps) {
 	return (
 		<Box sx={{ display: "flex", alignItems: "center" }}>
@@ -97,17 +98,21 @@ const dataHeader = {
 };
 
 export default function AccordionController({
-	...props
-}: AccordionControllerProps) {
+	data,
+}: any | AccordionControllerProps) {
+	console.log("data", data);
+
 	return (
-		<Accordion chevronPosition="left" sx={{ maxWidth: 400 }} mx="auto">
-			<Accordion.Item value="item-3">
-				<AccordionControl>Control 3</AccordionControl>
-				<Accordion.Panel>
-					<AccordionHeader data={dataHeader} />
-					<AccordionTable data={dataNodes} />
-				</Accordion.Panel>
-			</Accordion.Item>
-		</Accordion>
+		<>
+			<Accordion chevronPosition="left" sx={{ maxWidth: 400 }} mx="auto">
+				<Accordion.Item value="item-3">
+					<AccordionControl>{data.title}</AccordionControl>
+					<Accordion.Panel>
+						<AccordionHeader data={data} />
+						<AccordionTable data={data.tripNodes} />
+					</Accordion.Panel>
+				</Accordion.Item>
+			</Accordion>
+		</>
 	);
 }

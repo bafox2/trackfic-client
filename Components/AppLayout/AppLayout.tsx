@@ -7,6 +7,7 @@ import {
 	Tabs,
 	NavLink,
 	ActionIcon,
+	Button,
 } from "@mantine/core";
 import ColorSchemeToggle from "../ColorSchemeToggle/ColorSchemeToggle";
 import {
@@ -23,7 +24,6 @@ import React, { ReactNode } from "react";
 import { NextPage } from "next";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
-import { userAgent } from "next/server";
 
 interface Props {
 	children?: ReactNode;
@@ -52,12 +52,34 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 	fallbackData,
 }: Props) => {
 	const router = useRouter();
-	const { data, error } = useSWR<User | null>(
+	let { data, error } = useSWR<User | null>(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
 		fetcher,
 		{ fallbackData }
 	);
 
+	const onLogout = async () => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/api/sessions`,
+				{
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					// body: JSON.stringify(values),
+					credentials: "include",
+				}
+			);
+			const logoutData = await response.json();
+
+			router.push("/");
+			data = null;
+			console.log(logoutData);
+		} catch (error: any) {
+			console.log(error);
+		}
+	};
 	return (
 		<AppShell
 			sx={(theme) => ({
@@ -71,49 +93,80 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 			})}
 			fixed
 			header={
+				//if logged in give dashboard and query else give login about and example
 				<Header height={70} p="md">
 					<div
 						style={{ display: "flex", alignItems: "center", height: "100%" }}
 					>
-						<Text size="lg" weight="bolder">
-							{data?.user?.name}
-						</Text>
-
+						<Text size="lg" weight="bolder"></Text>
 						<Link href="/" passHref>
 							<NavLink
 								component="a"
-								label="Home"
+								label="🚦Trackfic"
 								active={router.pathname === "/home"}
 							/>
 						</Link>
-						<Link href="/auth/login" passHref>
-							<NavLink
-								component="a"
-								label="Log in"
-								active={router.pathname === "/auth/login"}
-							/>
-						</Link>
-						<Link href="/about" passHref>
-							<NavLink
-								component="a"
-								label="About"
-								active={router.pathname === "/about"}
-							/>
-						</Link>
-						<Link href="/dashboard/query" passHref>
-							<NavLink
-								component="a"
-								label="Query"
-								active={router.pathname === "/about"}
-							/>
-						</Link>
-						<Link href="/dashboard/query" passHref>
-							<NavLink
-								component="a"
-								label="Dashboard"
-								active={router.pathname === "/about"}
-							/>
-						</Link>
+						{data?.user?.name ? (
+							<>
+								<Link href="/dashboard" passHref>
+									<NavLink
+										component="a"
+										label="Dashboard"
+										active={router.pathname === "/dashboard"}
+									/>
+								</Link>
+								<Link href="/dashboard/query" passHref>
+									<NavLink
+										component="a"
+										label="Query"
+										active={router.pathname === "/dashboard/query"}
+									/>
+								</Link>
+								<Button
+									onClick={onLogout}
+									variant="outline"
+									style={{ marginLeft: "auto" }}
+								>
+									<NavLink
+										component="a"
+										label="Logout"
+										active={router.pathname === "/example"}
+									/>
+								</Button>
+							</>
+						) : (
+							<>
+								<Link href="/about" passHref>
+									<NavLink
+										component="a"
+										label="About"
+										active={router.pathname === "/about"}
+									/>
+								</Link>
+								<Link href="/example" passHref>
+									<NavLink
+										component="a"
+										label="Example"
+										active={router.pathname === "/example"}
+									/>
+								</Link>
+								<Link href="/auth/login" passHref>
+									<NavLink
+										component="a"
+										label="Log in"
+										active={router.pathname === "/auth/login"}
+									/>
+								</Link>
+								<Link href="/auth/register" passHref>
+									<NavLink
+										component="a"
+										label="Register"
+										active={router.pathname === "/auth/register"}
+									/>
+								</Link>
+							</>
+						)}
+
 						<ColorSchemeToggle />
 					</div>
 				</Header>
@@ -140,7 +193,7 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const data = await fetcher(
+	let data = await fetcher(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
 		context.req.headers
 	);

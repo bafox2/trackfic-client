@@ -9,6 +9,7 @@ import {
 	Button,
 	Overlay,
 	createStyles,
+	BackgroundImage,
 } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
@@ -16,10 +17,6 @@ const useStyles = createStyles((theme) => ({
 		position: "relative",
 		paddingTop: 180,
 		paddingBottom: 130,
-		backgroundImage: "url(../public/maps.png)",
-		backgroundSize: "cover",
-		backgroundPosition: "center",
-
 		"@media (max-width: 520px)": {
 			paddingTop: 80,
 			paddingBottom: 50,
@@ -169,9 +166,11 @@ export default function HomePage({ data }: StatsGroupProps) {
 
 	return (
 		<>
-			<div className={classes.wrapper}>
-				<Overlay color="#000" opacity={0.65} zIndex={1} />
-
+			<BackgroundImage
+				className={classes.wrapper}
+				src="https://uploads-ssl.webflow.com/5c29380b1110ec92a203aa84/5d63e3a75629b8615e85d5b4_image.png"
+			>
+				<Overlay color="#000" opacity={0.5} zIndex={1} />
 				<div className={classes.inner}>
 					<Title className={classes.title}>
 						Google Maps Information{" "}
@@ -199,7 +198,7 @@ export default function HomePage({ data }: StatsGroupProps) {
 						</Button>
 					</div>
 				</div>
-			</div>
+			</BackgroundImage>
 			<Welcome />
 			<Container size={640} className={classes.root}>
 				{stats}

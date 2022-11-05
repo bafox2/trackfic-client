@@ -5,30 +5,27 @@ import AccordionHeader from "../../Components/AccordionHeader/AccordionHeader";
 function Dashboard() {
 	const staticDataNodes = [
 		{
+			__v: 0,
 			_id: "5f9f1b9b9b9b9b9b9b9b9b9b",
-			user: "50341373e894ad16347efe01",
 			trip: "5151333e894ad16347efe01",
-			date: "2021-08-01T00:00:00.000Z",
 			durationGeneral: 1289,
 			durationNow: 1357,
 			createdAt: "2021-08-01T00:00:00.000Z",
 			updatedAt: "2021-08-01T00:00:00.000Z",
 		},
 		{
+			__v: 0,
 			_id: "5f9f1b9b9b9b9b9b9b9b9b9b",
-			user: "50341373e894ad16347efe01",
 			trip: "5151333e894ad16347efe01",
-			date: "2021-08-01T00:00:00.000Z",
 			durationGeneral: 1289,
 			durationNow: 1357,
 			createdAt: "2021-08-01T00:00:00.000Z",
 			updatedAt: "2021-08-01T00:00:00.000Z",
 		},
 		{
+			__v: 0,
 			_id: "5f9f1b9b9b9b9b9b9b9b9b9b",
-			user: "50341373e894ad16347efe01",
 			trip: "5151333e894ad16347efe01",
-			date: "2021-08-01T00:00:00.000Z",
 			durationGeneral: 1289,
 			durationNow: 1357,
 			createdAt: "2021-08-01T00:00:00.000Z",
@@ -176,34 +173,26 @@ function Dashboard() {
 			user: "6365313f4d208c495b0539eb",
 		},
 	];
+
+	//map over the api data and create an accordion for each trip
+	const dataAccordion = apiData.map((trip) => {
+		return <AccordionController key={trip._id} data={trip} />;
+	});
+
 	return (
 		<>
-			<div>the accordion that puts them together</div>
-			<AccordionController data={apiData} />
+			<div>daash</div>
+			{dataAccordion}
+			<div>static single controller that combines</div>
+			<AccordionController data={apiData[0]} />
 			<br />
-			<div>the desc, origin, destination</div>
+			<div>STATICthe desc, origin, destination</div>
 			<AccordionHeader data={staticDataHeader} />
 			<br />
-			<div>the data nodes</div>
+			<div>STATIC the data nodes</div>
 			<AccordionTable data={staticDataNodes} />
 		</>
 	);
 }
 
 export default Dashboard;
-
-const s = [
-	{
-		resource: "/home/ben/Projects/trackfic-client/pages/dashboard/index.tsx",
-		owner: "typescript",
-		code: "2322",
-		severity: 8,
-		message:
-			"Type '{ data: { __v: number; _id: string; createdAt: string; description: string; destination: string; origin: string; schedule: string; title: string; tripNodes: { __v: number; _id: string; createdAt: string; ... 4 more ...; updatedAt: string; }[]; updatedAt: string; user: string; }[]; }' is not assignable to type 'IntrinsicAttributes & AccordionControllerProps'.\n  Property 'data' does not exist on type 'IntrinsicAttributes & AccordionControllerProps'.",
-		source: "ts",
-		startLineNumber: 182,
-		startColumn: 25,
-		endLineNumber: 182,
-		endColumn: 29,
-	},
-];

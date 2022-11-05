@@ -56,25 +56,59 @@ const useStyles = createStyles((theme) => ({
 	},
 }));
 
-interface RowDataNodes {
+interface RowDataNode {
+	__v: number;
 	_id: string;
-	user: string;
-	trip: string;
-	date: string;
 	durationGeneral: number;
 	durationNow: number;
+	timeRequested: string;
+	trip: string;
 	createdAt: string;
 	updatedAt: string;
 }
 [];
 
-export default function TableData({ data }: { data: RowDataNodes[] }) {
-	const { classes, cx } = useStyles();
+const dummyData = [
+	{
+		__v: 0,
+		_id: "60a6b1b0b0b5b00015b0b0b0",
+		durationGeneral: 0,
+		durationNow: 0,
+		timeRequested: "2021-05-18T00:00:00.000Z",
+		trip: "60a6b1b0b0b5b00015b0b0b0",
+		createdAt: "2021-05-18T00:00:00.000Z",
+		updatedAt: "2021-05-18T00:00:00.000Z",
+	},
+];
 
-	const rows = data.map((row) => (
+export default function TableData({ data }: RowDataNode | any) {
+	const { classes, cx } = useStyles();
+	if (data.length === 0) {
+		return (
+			<>
+				<Table sx={{ minWidth: 700 }}>
+					<thead className={cx(classes.header)}>
+						<tr>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Estimate</th>
+							<th>Estimate with Traffic</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>No entries yet</td>
+						</tr>
+					</tbody>
+				</Table>
+			</>
+		);
+	}
+
+	const rows = data.map((row: RowDataNode) => (
 		<tr key={row._id}>
-			<td>{row.date.slice(0, 10)}</td>
-			<td>{row.date.slice(11, 16)}</td>
+			<td>{row.createdAt.slice(0, 10)}</td>
+			<td>{row.createdAt.slice(11, 16)}</td>
 			<td>{row.durationGeneral}</td>
 			<td>{row.durationNow}</td>
 		</tr>
