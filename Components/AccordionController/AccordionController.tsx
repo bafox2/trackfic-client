@@ -4,21 +4,15 @@ import {
 	AccordionControlProps,
 	Box,
 } from "@mantine/core";
-import { IconPlayerPause, IconEdit, IconTrashX } from "@tabler/icons";
+import {
+	IconPlayerPause,
+	IconEdit,
+	IconTrashX,
+	IconPlayerPlay,
+} from "@tabler/icons";
 import AccordionHeader from "../AccordionHeader/AccordionHeader";
 import AccordionTable from "../AccordionTable/AccordionTable";
-
-const onPause = (e: Event) => {
-	console.log("onPause", e);
-};
-
-const onEdit = () => {
-	console.log("onEdit");
-};
-
-const onDelete = () => {
-	console.log("onDelete");
-};
+import { useRouter } from "next/router";
 
 interface AccordionControllerProps {
 	data: {
@@ -43,18 +37,73 @@ interface AccordionControllerProps {
 		updatedAt: string;
 		user: string;
 	}[];
+	key: string;
 }
-function AccordionControl(props: AccordionControlProps) {
+
+interface CustomAccordionControlProps extends AccordionControlProps {
+	data: {
+		__v: number;
+		_id: string;
+		active: boolean;
+		createdAt: string;
+		description: string;
+		destination: string;
+		origin: string;
+		schedule: string;
+		title: string;
+	};
+}
+
+function AccordionControl(props: CustomAccordionControlProps) {
+	const router = useRouter();
+	const onPause = (id: string): any => {
+		fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trips/${id}/pause`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data));
+	};
+
+	const onEdit = (data: object) => {
+		//sends the user to the /dashboard/query page with the trip information as a prop
+		router.push({
+			pathname: "/dashboard/query",
+			query: { data: JSON.stringify(data) },
+		});
+	};
+
+	const onDelete = (id: string) => {
+		fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trips/${id}`, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data));
+	};
+	console.log("AccordionControl", props);
 	return (
 		<Box sx={{ display: "flex", alignItems: "center" }}>
 			<Accordion.Control {...props} />
-			<ActionIcon onClick={(e: any) => onPause(e)} size="lg">
-				<IconPlayerPause size={16} />
-			</ActionIcon>
-			<ActionIcon onClick={onEdit} size="lg">
+			{props.data.active ? (
+				<ActionIcon onClick={() => onPause(props.data._id)} size="lg">
+					<IconPlayerPlay size={16} />
+				</ActionIcon>
+			) : (
+				<ActionIcon onClick={() => onPause(props.data._id)} size="lg">
+					<IconPlayerPause size={16} />
+				</ActionIcon>
+			)}
+			<ActionIcon onClick={() => onEdit(props)} size="lg">
 				<IconEdit size={16} />
 			</ActionIcon>{" "}
-			<ActionIcon onClick={onDelete} size="lg">
+			<ActionIcon onClick={() => onDelete(props.data._id)} size="lg">
 				<IconTrashX size={16} />
 			</ActionIcon>
 		</Box>
@@ -111,8 +160,8 @@ export default function AccordionController({
 	return (
 		<>
 			<Accordion chevronPosition="left" sx={{ minWidth: 500 }} mx="sm">
-				<Accordion.Item value="item-3">
-					<AccordionControl>{data.title}</AccordionControl>
+				<Accordion.Item value="a">
+					<AccordionControl data={data}>{data.title}</AccordionControl>
 					<Accordion.Panel>
 						<AccordionHeader data={data} />
 						<AccordionTable data={data.tripNodes} />
