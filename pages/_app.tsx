@@ -62,7 +62,85 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 				toggleColorScheme={toggleColorScheme}
 			>
 				<MantineProvider
-					theme={{ colorScheme, fontFamily: "Red Hat Text, sans-serif" }}
+					theme={{
+						colorScheme,
+						fontFamily: "Red Hat Text, sans-serif",
+						colors: {
+							lightSilver: [
+								"#F1F2F3",
+								"#D9DBDE",
+								"#C0C4C9",
+								"#A7ADB4",
+								"#8E969E",
+								"#767F89",
+								"#5E666E",
+								"#474D52",
+								"#2F3337",
+								"#181A1B",
+							],
+
+							platinum: [
+								"#F2F2F2",
+								"#DBDBDB",
+								"#C4C4C4",
+								"#ADADAD",
+								"#969696",
+								"#808080",
+								"#666666",
+								"#4D4D4D",
+								"#333333",
+								"#1A1A1A",
+							],
+							teaGreen: [
+								"#EFFAEB",
+								"#D2F1C6",
+								"#B6E8A1",
+								"#99DF7C",
+								"#7CD657",
+								"#60CD32",
+								"#4CA428",
+								"#397B1E",
+								"#265214",
+								"#13290A",
+							],
+							freshBlue: [
+								"#E5F4FF",
+								"#B8E0FF",
+								"#8ACCFF",
+								"#5CB8FF",
+								"#2EA4FF",
+								"#0090FF",
+								"#0073CC",
+								"#005699",
+								"#003A66",
+								"#001D33",
+							],
+							bananaYellow: [
+								"#FFFBE5",
+								"#FFF3B8",
+								"#FFEC8A",
+								"#FFE45C",
+								"#FFDD2E",
+								"#FFD600",
+								"#CCAB00",
+								"#998000",
+								"#665500",
+								"#332B00",
+							],
+							mountainYellow: [
+								"#FEF7E7",
+								"#FBEABC",
+								"#F9DC90",
+								"#F6CF65",
+								"#F3C139",
+								"#F1B40E",
+								"#C1900B",
+								"#916C08",
+								"#604806",
+								"#302403",
+							],
+						},
+					}}
 					withGlobalStyles
 					withNormalizeCSS
 				>
