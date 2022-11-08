@@ -28,19 +28,28 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 	return (
 		<>
 			<Group align="flex-start" spacing="xl">
-				<ActionIcon sx={(theme) => ({ color: theme.colors.freshBlue[3] })}>
+				<ActionIcon
+					size={32}
+					sx={(theme) => ({ color: theme.colors.freshBlue[3] })}
+				>
 					<IconCurrentLocation />
 				</ActionIcon>
 				<Text>{data.origin}</Text>
-				<ActionIcon>
+				<ActionIcon size={32}>
 					<IconRoute2 />
 				</ActionIcon>
-				<ActionIcon sx={(theme) => ({ color: theme.colors.teaGreen[6] })}>
+				<ActionIcon
+					size={32}
+					sx={(theme) => ({ color: theme.colors.teaGreen[6] })}
+				>
 					<IconPennant />
 				</ActionIcon>
 
 				<Text>{data.destination}</Text>
-				<ActionIcon sx={(theme) => ({ color: theme.colors.platinum[6] })}>
+				<ActionIcon
+					size={32}
+					sx={(theme) => ({ color: theme.colors.platinum[6] })}
+				>
 					<IconClock />
 				</ActionIcon>
 				<Text>Schedule: {data.schedule}</Text>

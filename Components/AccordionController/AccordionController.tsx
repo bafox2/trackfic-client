@@ -70,10 +70,13 @@ function AccordionControl(props: CustomAccordionControlProps) {
 
 	const onEdit = (data: object) => {
 		//sends the user to the /dashboard/query page with the trip information as a prop
-		router.push({
-			pathname: "/dashboard/query",
-			query: { data: JSON.stringify(data) },
-		});
+		router.push(
+			{
+				pathname: "/dashboard/query",
+				query: { data: JSON.stringify(data) },
+			},
+			"/dashboard/query"
+		);
 	};
 
 	const onDelete = (id: string) => {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Router, { withRouter } from "next/router";
 import { Stepper, Button, Group, TextInput, Code, Text } from "@mantine/core";
 import { Cron } from "react-js-cron-mantine";
 import "react-js-cron/dist/styles.css";
@@ -31,8 +32,11 @@ type CreateTripSchema = TypeOf<typeof createTripSchema>;
 
 export default function Query() {
 	const [active, setActive] = useState(0);
-	const [cronValue, setCronValue] = useState("* * * * *");
+	const [cronValue, setCronValue] = useState("");
 	const router = useRouter();
+	const dataParams = router.query.data
+		? JSON.parse(router.query.data as string)
+		: null;
 	const [tripError, setTripError] = useState();
 	const {
 		register,
@@ -50,24 +54,38 @@ export default function Query() {
 	});
 
 	const onSubmit = async (values: CreateTripSchema) => {
-		console.log(process.env.NEXT_PUBLIC_API_URL);
-		try {
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/api/trips`,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(values),
-					credentials: "include",
-				}
-			);
-			const data = await response.json();
-			console.log(data, "data from create trip");
-		} catch (error: any) {
-			setTripError(error.message);
-			console.log(error);
+		if (dataParams) {
+			const res = await fetch(`/api/trips/${dataParams._id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				credentials: "include",
+				body: JSON.stringify({
+					...values,
+				}),
+			});
+			const data = await res.json();
+			if (data.error) {
+				setTripError(data.error);
+			} else {
+				router.push("/dashboard");
+			}
+		} else {
+			const res = await fetch("/api/trips", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				credentials: "include",
+				body: JSON.stringify(values),
+			});
+			const data = await res.json();
+			if (data.error) {
+				setTripError(data.error);
+			} else {
+				router.push("/dashboard");
+			}
 		}
 	};
 
@@ -79,7 +97,6 @@ export default function Query() {
 			return current < 4 ? current + 1 : current;
 		});
 
-	console.log(getValues(), "getValues");
 	const prevStep = () =>
 		setActive((current) => (current > 0 ? current - 1 : current));
 
@@ -91,6 +108,7 @@ export default function Query() {
 						label="Title"
 						placeholder="Work Commute"
 						size="lg"
+						defaultValue={dataParams ? dataParams.data.title : "tester"}
 						{...register("title")}
 					/>
 					<Text color={"red"}>{errors.title?.message}</Text>
@@ -98,6 +116,7 @@ export default function Query() {
 						label="Description"
 						placeholder="Late shift"
 						size="lg"
+						defaultValue={dataParams ? dataParams.data.description : ""}
 						{...register("description")}
 					/>
 					<Text color={"red"}>{errors.description?.message}</Text>
@@ -108,6 +127,7 @@ export default function Query() {
 						placeholder={"42 Wallabee Way Sydney, Austrailia"}
 						label={"Where are you starting?"}
 						control={control}
+						defaultValue={dataParams ? dataParams.data.origin : ""}
 						name={"origin"}
 					/>
 					<Text color={"red"}>{errors.origin?.message}</Text>
@@ -116,6 +136,7 @@ export default function Query() {
 						placeholder={"21 Seasame Street"}
 						name={"destination"}
 						control={control}
+						defaultValue={dataParams ? dataParams.data.destination : ""}
 						label={"Where are you going?"}
 					/>
 					<Text color={"red"}>{errors.destination?.message}</Text>
