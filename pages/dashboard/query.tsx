@@ -29,7 +29,7 @@ const createTripSchema = object({
 
 type CreateTripSchema = TypeOf<typeof createTripSchema>;
 
-export default function Demo() {
+export default function Query() {
 	const [active, setActive] = useState(0);
 	const [cronValue, setCronValue] = useState("* * * * *");
 	const router = useRouter();

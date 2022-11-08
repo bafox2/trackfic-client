@@ -97,9 +97,7 @@ const useStyles = createStyles((theme) => ({
 	},
 	root: {
 		display: "flex",
-		backgroundImage: `linear-gradient(-60deg, ${
-			theme.colors[theme.primaryColor][4]
-		} 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
+		backgroundImage: `linear-gradient(-60deg, ${theme.colors.platinum[2]} 0%, ${theme.colors.platinum} 100%)`,
 		padding: theme.spacing.xl * 1.5,
 		marginBottom: theme.spacing.xl * 1.5,
 		borderRadius: theme.radius.md,
@@ -110,7 +108,7 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	count: {
-		color: theme.colors.cyan[6],
+		color: theme.colors.teaGreen[6],
 		fontSize: 32,
 		lineHeight: 1,
 		fontWeight: 700,

@@ -20,7 +20,7 @@ const useStyles = createStyles((theme) => ({
 		transition: "box-shadow 150ms ease",
 
 		"&::after": {
-			width: "400px",
+			width: "inherit",
 			content: '""',
 			position: "absolute",
 			left: 0,

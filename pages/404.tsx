@@ -8,7 +8,6 @@ import {
 	Anchor,
 } from "@mantine/core";
 import Link from "next/link";
-// https://ui.mantine.dev/category/error-pages
 
 const useStyles = createStyles((theme) => ({
 	root: {
