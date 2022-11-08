@@ -1,5 +1,11 @@
-import { ThemeContext } from "@emotion/react";
-import { Text, createStyles, Paper, Group, ActionIcon } from "@mantine/core";
+import {
+	Text,
+	createStyles,
+	Paper,
+	Group,
+	ThemeIcon,
+	Stack,
+} from "@mantine/core";
 import {
 	IconRoute2,
 	IconPennant,
@@ -27,33 +33,42 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 	console.log(data);
 	return (
 		<>
-			<Group align="flex-start" spacing="xl">
-				<ActionIcon
-					size={32}
-					sx={(theme) => ({ color: theme.colors.freshBlue[3] })}
-				>
-					<IconCurrentLocation />
-				</ActionIcon>
-				<Text>{data.origin}</Text>
-				<ActionIcon size={32}>
-					<IconRoute2 />
-				</ActionIcon>
-				<ActionIcon
-					size={32}
-					sx={(theme) => ({ color: theme.colors.teaGreen[6] })}
-				>
-					<IconPennant />
-				</ActionIcon>
+			<Stack align="flex-start" spacing="xl">
+				<Group>
+					<ThemeIcon
+						color={"blue"}
+						variant={"outline"}
+						size={32}
+						sx={(theme) => ({ color: theme.colors.freshBlue[3] })}
+					>
+						<IconCurrentLocation />
+					</ThemeIcon>
+					<Text>{data.origin}</Text>
+				</Group>
+				<Group>
+					<ThemeIcon
+						color={"green"}
+						variant={"outline"}
+						size={32}
+						sx={(theme) => ({ color: theme.colors.teaGreen[6] })}
+					>
+						<IconPennant />
+					</ThemeIcon>
 
-				<Text>{data.destination}</Text>
-				<ActionIcon
-					size={32}
-					sx={(theme) => ({ color: theme.colors.platinum[6] })}
-				>
-					<IconClock />
-				</ActionIcon>
-				<Text>Schedule: {data.schedule}</Text>
-			</Group>
+					<Text>{data.destination}</Text>
+				</Group>
+				<Group>
+					<ThemeIcon
+						color={"gray"}
+						variant={"outline"}
+						size={32}
+						sx={(theme) => ({ color: theme.colors.platinum[6] })}
+					>
+						<IconClock />
+					</ThemeIcon>
+					<Text>Schedule: {data.schedule}</Text>
+				</Group>
+			</Stack>
 		</>
 	);
 }
