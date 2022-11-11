@@ -46,11 +46,11 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	highlight: {
-		color: theme.colors[theme.primaryColor][4],
+		color: theme.colors.freshBlue[3],
 	},
 
 	description: {
-		color: theme.colors.gray[0],
+		color: theme.colors.platinum[2],
 		textAlign: "center",
 
 		"@media (max-width: 520px)": {
@@ -97,23 +97,15 @@ const useStyles = createStyles((theme) => ({
 	},
 	root: {
 		display: "flex",
-		backgroundImage: `linear-gradient(-60deg, ${theme.colors.platinum[2]} 0%, ${theme.colors.platinum} 100%)`,
+		backgroundImage: `linear-gradient(-60deg, ${theme.colors.lightSilver[5]} 0%, ${theme.colors.lightSilver[6]} 80%)`,
 		padding: theme.spacing.xl * 1.5,
 		marginBottom: theme.spacing.xl * 1.5,
 		borderRadius: theme.radius.md,
 
 		[theme.fn.smallerThan("sm")]: {
 			flexDirection: "column",
+			width: "70%",
 		},
-	},
-
-	count: {
-		color: theme.colors.teaGreen[6],
-		fontSize: 32,
-		lineHeight: 1,
-		fontWeight: 700,
-		marginBottom: theme.spacing.md,
-		fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 	},
 
 	stat: {
@@ -122,7 +114,7 @@ const useStyles = createStyles((theme) => ({
 		"& + &": {
 			paddingLeft: theme.spacing.xl,
 			marginLeft: theme.spacing.xl,
-			borderLeft: `1px solid ${theme.colors[theme.primaryColor][3]}`,
+			borderLeft: `1px solid ${theme.colors.mountainYellow[4]}`,
 
 			[theme.fn.smallerThan("sm")]: {
 				paddingLeft: 0,
@@ -130,18 +122,26 @@ const useStyles = createStyles((theme) => ({
 				borderLeft: 0,
 				paddingTop: theme.spacing.xl,
 				marginTop: theme.spacing.xl,
-				borderTop: `1px solid ${theme.colors[theme.primaryColor][3]}`,
+				borderTop: `1px solid ${theme.colors.freshBlue[4]}`,
 			},
 		},
 	},
+	count: {
+		color: theme.colors.teaGreen[5],
+		fontSize: 32,
+		lineHeight: 1,
+		fontWeight: 700,
+		marginBottom: theme.spacing.md,
+		fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+	},
 
 	descriptionStat: {
-		color: theme.colors.cyan[6],
+		color: theme.colors.teaGreen[4],
 		fontSize: theme.fontSizes.sm,
 		marginTop: 5,
 	},
 	titleStat: {
-		color: theme.colors.cyan[6],
+		color: theme.colors.teaGreen[5],
 		textTransform: "uppercase",
 		fontWeight: 700,
 		fontSize: theme.fontSizes.sm,
@@ -199,6 +199,7 @@ export default function HomePage({ data }: StatsGroupProps) {
 				</div>
 			</BackgroundImage>
 			<Welcome />
+			<br />
 			<Container size={640} className={classes.root}>
 				{stats}
 			</Container>

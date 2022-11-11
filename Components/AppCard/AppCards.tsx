@@ -5,6 +5,7 @@ import {
 	ThemeIcon,
 	Anchor,
 	Stack,
+	Group,
 } from "@mantine/core";
 import {
 	IconBrandReact,
@@ -12,7 +13,7 @@ import {
 	IconBrandMantine,
 	IconCalendarTime,
 	IconMap,
-	IconTypography,
+	IconSquareLetterT,
 	IconBuildingCircus,
 	IconHexagonLetterE,
 	IconDiamond,
@@ -48,10 +49,13 @@ const useStyles = createStyles((theme) => ({
 			width: 6,
 			backgroundImage: theme.fn.linearGradient(
 				0,
-				theme.colors.pink[6],
-				theme.colors.orange[6]
+				theme.colors.teaGreen[6],
+				theme.colors.freshBlue[6]
 			),
 		},
+	},
+	icon: {
+		border: `2px solid ${theme.colors.gray[4]}`,
 	},
 }));
 
@@ -64,8 +68,8 @@ export default function appCards() {
 			description:
 				"Cron is a web app that allows you to schedule tasks to run on a schedule.",
 			link: "https://www.npmjs.com/package/cron",
-			color1: "#000000",
-			color2: "#FFFFFF",
+			color1: "#0FF000",
+			color2: "#FAAFFF",
 			icon: IconCalendarTime,
 		},
 		{
@@ -102,7 +106,7 @@ export default function appCards() {
 			link: "https://www.typescriptlang.org/",
 			color1: "#f5f5f5",
 			color2: "#f5f5f5",
-			icon: IconTypography,
+			icon: IconSquareLetterT,
 		},
 		{
 			title: "React",
@@ -180,17 +184,19 @@ export default function appCards() {
 
 	const cards = apps.map((app) => (
 		<Paper withBorder radius="md" className={classes.card}>
-			<ThemeIcon
-				size="xl"
-				radius="md"
-				variant="gradient"
-				gradient={{ deg: 0, from: `${app.color1}`, to: `${app.color2}` }}
-			>
-				<app.icon color="red" />
-			</ThemeIcon>
-			<Text size="xl" weight={500} mt="md">
-				{app.title}
-			</Text>
+			<Group>
+				<ThemeIcon
+					className={classes.icon}
+					size="xl"
+					radius="md"
+					color={"#FFFFFF"}
+				>
+					<app.icon color="#7CD657" />
+				</ThemeIcon>
+				<Text size="xl" weight={500} mt="md">
+					{app.title}
+				</Text>
+			</Group>
 			<Text size="sm" mt="sm" color="dimmed">
 				{app.description}
 			</Text>
