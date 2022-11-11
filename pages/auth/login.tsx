@@ -55,10 +55,12 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const createSessionSchema = object({
-	email: string().min(1, {
-		message: "Email is required",
-	}),
-	password: string().min(1, {
+	email: string()
+		.min(5, {
+			message: "Email is required",
+		})
+		.email({ message: "The email is invalid." }),
+	password: string().min(6, {
 		message: "Password is required",
 	}),
 });
@@ -92,13 +94,19 @@ export default function AuthenticationImage() {
 				}
 			);
 			const data = await response.json();
-			router.push("/");
-			console.log(data);
+			console.log(data, "data");
+			if (data.errors) {
+				setLoginError(data.errors[0].message);
+			}
 		} catch (error: any) {
-			setLoginError(error.message);
-			console.log(error);
+			setLoginError(error);
+			console.log(error, "error");
 		}
+		router.reload();
+		router.push("/dashboard");
 	};
+
+	console.log({ errors });
 
 	return (
 		<div className={classes.wrapper}>
@@ -113,9 +121,7 @@ export default function AuthenticationImage() {
 					>
 						Welcome back to Trackfic!
 					</Title>
-					<Text className={classes.error} size="xl">
-						{loginError}
-					</Text>
+
 					<TextInput
 						label="Email address"
 						placeholder="hello@gmail.com"
@@ -136,7 +142,9 @@ export default function AuthenticationImage() {
 					<Text className={classes.error} size="xl">
 						{errors.password?.message}
 					</Text>
-					{/* <Checkbox label="Keep me logged in" mt="xl" size="md" /> */}
+					<Text className={classes.error} size="xl">
+						{loginError}
+					</Text>
 					<Button fullWidth mt="xl" size="md" type="submit">
 						Login
 					</Button>

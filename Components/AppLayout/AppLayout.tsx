@@ -28,7 +28,7 @@ import fetcher from "../../utils/fetcher";
 interface Props {
 	children?: ReactNode;
 	data?: any;
-	data1?: any;
+	dataProp?: any;
 	fallbackData?: any;
 	// any props that come into the component
 }
@@ -52,16 +52,14 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 	fallbackData,
 }: Props) => {
 	const router = useRouter();
-	let { data, error } = useSWR<User | null>(
-		fetcher(
-			`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
-			{
-				contentType: "application/json",
-			},
-			true
-		)
+
+	const { data, error, isValidating, mutate } = useSWR<User | null>(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
+		fetcher,
+		{ fallbackData }
 	);
 
+	//write a mutute function to update the data when the user logs out
 	const onLogout = async () => {
 		try {
 			const response = await fetch(
@@ -75,17 +73,15 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 					credentials: "include",
 				}
 			);
-			const logoutData = await response.json();
-
-			data = null;
-			console.log(logoutData);
-			router.reload();
+			document.cookie =
+				"acccessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+			document.cookie =
+				"refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			mutate(null);
 		} catch (error: any) {
 			console.log(error);
 		}
 	};
-
-	console.log(data, "data");
 	return (
 		<AppShell
 			sx={(theme) => ({
@@ -103,20 +99,25 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 					<div
 						style={{ display: "flex", alignItems: "center", height: "100%" }}
 					>
-						<Text size="lg" weight="bolder"></Text>
 						<Link href="/" passHref>
 							<NavLink
 								sx={(theme) => ({
 									":hover": {
 										backgroundColor: "transparent",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+										borderRadius: "50%",
 									},
 								})}
 								component="a"
 								label={
-									<>
+									<Group>
 										<Text
 											sx={() => ({
+												transform: "rotateY(180deg)",
 												marginLeft: "12px",
+												marginTop: "4px",
 												backgroundColor: "transparent",
 												fontSize: "50px",
 											})}
@@ -126,18 +127,20 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 										<Text
 											sx={() => ({
 												backgroundColor: "transparent",
-												marginBottom: "15px",
+												marginLeft: "-78px",
+												marginBottom: "17px",
 												marginTop: "-20px",
 												fontSize: "20px",
 											})}
 										>
 											Trackfic
 										</Text>
-									</>
+									</Group>
 								}
 								active={router.pathname === "/home"}
 							/>
 						</Link>
+
 						{data?.user?.name}
 						{data?.user?.name ? (
 							<>
@@ -227,16 +230,10 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	let data = await fetcher(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/me`,
-		context.req.headers,
-		true
-	);
-	return {
-		props: {
-			fallbackData: data,
-		},
-	};
-};
 export default AppLayout;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const data = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}/api/me`, true);
+
+	return { props: { fallbackData: data } };
+};
