@@ -10,7 +10,11 @@ import {
 	Overlay,
 	createStyles,
 	BackgroundImage,
+	Divider,
+	Group,
+	Stack,
 } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
 	wrapper: {
@@ -46,7 +50,7 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	highlight: {
-		color: theme.colors.freshBlue[3],
+		color: theme.colors.freshBlue[5],
 	},
 
 	description: {
@@ -97,9 +101,10 @@ const useStyles = createStyles((theme) => ({
 	},
 	root: {
 		display: "flex",
-		backgroundImage: `linear-gradient(-60deg, ${theme.colors.lightSilver[5]} 0%, ${theme.colors.lightSilver[6]} 80%)`,
+		border: `1px solid ${theme.colors.freshBlue[4]}`,
 		padding: theme.spacing.xl * 1.5,
 		marginBottom: theme.spacing.xl * 1.5,
+		marginTop: theme.spacing.xl * 1.5,
 		borderRadius: theme.radius.md,
 
 		[theme.fn.smallerThan("sm")]: {
@@ -114,7 +119,7 @@ const useStyles = createStyles((theme) => ({
 		"& + &": {
 			paddingLeft: theme.spacing.xl,
 			marginLeft: theme.spacing.xl,
-			borderLeft: `1px solid ${theme.colors.mountainYellow[4]}`,
+			borderLeft: `1px solid ${theme.colors.freshBlue[2]}`,
 
 			[theme.fn.smallerThan("sm")]: {
 				paddingLeft: 0,
@@ -186,20 +191,40 @@ export default function HomePage({ data }: StatsGroupProps) {
 					</Container>
 
 					<div className={classes.controls}>
-						<Button className={classes.control} variant="white" size="lg">
-							Get started
-						</Button>
-						<Button
-							className={cx(classes.control, classes.secondaryControl)}
-							size="lg"
-						>
-							Live demo
-						</Button>
+						<Link href="/auth/login" passHref>
+							<Button className={classes.control} variant="white" size="lg">
+								Get started
+							</Button>
+						</Link>
+
+						<Link href="/example" passHref>
+							<Button
+								className={cx(classes.control, classes.secondaryControl)}
+								size="lg"
+							>
+								Live demo
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</BackgroundImage>
-			<Welcome />
-			<br />
+			<Stack sx={{ marginBottom: "25px" }} align={"center"}>
+				<Welcome />
+				<Group sx={{ gap: "30px" }}>
+					<Link href="/example" passHref>
+						<Button size="xl" variant="light" component="a" href="/example">
+							Example
+						</Button>
+					</Link>
+					<Link href="/about" passHref>
+						<Button size="xl" variant="light" component="a" href="/about">
+							About
+						</Button>
+					</Link>
+				</Group>
+			</Stack>
+			<Divider />
+
 			<Container size={640} className={classes.root}>
 				{stats}
 			</Container>
