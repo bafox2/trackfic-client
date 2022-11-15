@@ -8,6 +8,7 @@ import {
 	Title,
 	Text,
 	Anchor,
+	Divider,
 } from "@mantine/core";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -153,6 +154,18 @@ export default function AuthenticationImage() {
 							onClick={(event) => event.preventDefault()}
 						>
 							Register
+						</Anchor>
+					</Text>
+					<Divider sx={{ marginTop: "10px" }}></Divider>
+					<Text align="center" mt="md">
+						Don&apos;t want to make an account, but still want to get a feel of
+						my development?{" "}
+						<Anchor<"a">
+							href="#"
+							weight={700}
+							onClick={(event) => event.preventDefault()}
+						>
+							Shortcut Account
 						</Anchor>
 					</Text>
 				</Paper>

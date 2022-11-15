@@ -4,7 +4,7 @@ import {
 	createStyles,
 	TextInput,
 	PasswordInput,
-	Checkbox,
+	Divider,
 	Button,
 	Title,
 	Text,
@@ -38,7 +38,18 @@ const createUserSchema = object({
 	message: "Passwords do not match",
 	path: ["passwordConfirmation"],
 });
+const createSessionSchema = object({
+	email: string()
+		.min(5, {
+			message: "Email is required",
+		})
+		.email({ message: "The email is invalid." }),
+	password: string().min(6, {
+		message: "Password is required",
+	}),
+});
 
+type CreateSessionInput = TypeOf<typeof createSessionSchema>;
 type CreateUserInput = TypeOf<typeof createUserSchema>;
 
 const useStyles = createStyles((theme) => ({
@@ -90,8 +101,10 @@ export default function AuthRegister() {
 	});
 	const router = useRouter();
 	const [registerError, setRegisterError] = useState();
+	const [loginError, setLoginError] = useState();
 
 	async function onSubmit(values: CreateUserInput) {
+		console.log("creating account");
 		try {
 			const response = await fetch(
 				`${process.env.NEXT_PUBLIC_API_URL}/api/users`,
@@ -105,13 +118,50 @@ export default function AuthRegister() {
 				}
 			);
 			const data = await response.json();
+			if (data.errors) {
+				setRegisterError(data.errors[0].message);
+				return;
+			}
 
-			router.push("/login");
+			router.push("/auth/login");
 		} catch (error: any) {
 			setRegisterError(error.message);
 			console.log(error);
 		}
 	}
+	//jobs@work.com
+	//workhard
+	const onCheatSubmit = async (values: CreateSessionInput) => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/api/sessions`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(
+						//use the jobs@work.com with the password workhard
+						{
+							email: "jobs@work.com",
+							password: "workhard",
+						}
+					),
+					credentials: "include",
+				}
+			);
+			const data = await response.json();
+			if (data.errors) {
+				setLoginError(data.errors[0].message);
+				return;
+			}
+		} catch (error: any) {
+			setLoginError(error?.message);
+			return;
+		}
+
+		router.push("/dashboard");
+	};
 
 	return (
 		<div className={classes.wrapperForm}>
@@ -185,6 +235,17 @@ export default function AuthRegister() {
 						>
 							Sign in
 						</Anchor>
+					</Text>
+
+					<Divider sx={{ marginTop: "10px" }}></Divider>
+					<Text align="center" mt="md">
+						Want to get a feel for without signing up?{" "}
+						<Anchor<"a"> href="#" weight={700} onClick={() => onCheatSubmit}>
+							Shortcut Account
+						</Anchor>
+						<Text className={classes.error} size="xl">
+							{loginError}
+						</Text>
 					</Text>
 				</Paper>
 			</form>
