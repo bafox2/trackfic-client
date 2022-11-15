@@ -1,7 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import { useState } from "react";
 import { AppProps } from "next/app";
-import CustomFonts from "../Components/CustomFonts/CustomFonts";
 import { getCookie, setCookie } from "cookies-next";
 import Head from "next/head";
 import {
@@ -10,7 +9,7 @@ import {
 	ColorSchemeProvider,
 } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import AppLayout from "../Components/AppLayout/AppLayout";
+import AppLayout from "../Components/AppLayout";
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 	const { Component, pageProps } = props;
@@ -144,7 +143,6 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
 					withGlobalStyles
 					withNormalizeCSS
 				>
-					<CustomFonts />
 					<NotificationsProvider>
 						<AppLayout {...appLayoutProps}>
 							<Component {...pageProps} />

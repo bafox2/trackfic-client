@@ -2799,6 +2799,11 @@
   "resolved" "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.186.tgz"
   "version" "4.14.186"
 
+"@types/luxon@^3.1.0":
+  "integrity" "sha512-gCd/HcCgjqSxfMrgtqxCgYk/22NBQfypwFUG7ZAyG/4pqs51WLTcUzVp1hqTbieDYeHS3WoVEh2Yv/2l+7B0Vg=="
+  "resolved" "https://registry.npmjs.org/@types/luxon/-/luxon-3.1.0.tgz"
+  "version" "3.1.0"
+
 "@types/mapbox-gl@^2.6.0":
   "integrity" "sha512-EPIfNO7WApXaFM7DuJBj+kpXmqffqJHMJ3Q9gbV/nNL23XHR0PC5CCDYbAFa4tKErm0xJd9C5kPLF6KvA/cRcA=="
   "resolved" "https://registry.npmjs.org/@types/mapbox-gl/-/mapbox-gl-2.7.6.tgz"
@@ -8125,6 +8130,11 @@
   "version" "6.0.0"
   dependencies:
     "yallist" "^4.0.0"
+
+"luxon@^3.1.0":
+  "integrity" "sha512-7w6hmKC0/aoWnEsmPCu5Br54BmbmUp5GfcqBxQngRcXJ+q5fdfjEzn7dxmJh2YdDhgW8PccYtlWKSv4tQkrTQg=="
+  "resolved" "https://registry.npmjs.org/luxon/-/luxon-3.1.0.tgz"
+  "version" "3.1.0"
 
 "lz-string@^1.4.4":
   "integrity" "sha512-0ckx7ZHRPqb0oUm8zNr+90mtf9DQB60H1wMCjBtfi62Kl3a7JbHob6gA2bC+xRvZoOL+1hzUK8jeuEIQE8svEQ=="

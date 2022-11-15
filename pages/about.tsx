@@ -1,5 +1,5 @@
 import { Group, Stack, Title } from "@mantine/core";
-import AppCards from "../Components/AppCard/AppCards";
+import AppCards from "../Components/AppCards";
 
 export default function About() {
 	return (

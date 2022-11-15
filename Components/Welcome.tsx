@@ -1,18 +1,27 @@
-import { Title, Text, Anchor } from "@mantine/core";
-import useStyles from "./Welcome.styles";
+import { Title, Text, Anchor, createStyles } from "@mantine/core";
 
+const useStyles = createStyles((theme) => ({
+	title: {
+		color: theme.colorScheme === "dark" ? theme.white : theme.black,
+		fontSize: 100,
+		fontWeight: 900,
+		letterSpacing: 4,
+
+		[theme.fn.smallerThan("md")]: {
+			fontSize: 50,
+		},
+	},
+}));
 export function Welcome() {
-	const { classes } = useStyles();
-
+	const { classes, cx } = useStyles();
 	return (
 		<>
 			<Title className={classes.title} align="center" mt={100}>
 				Welcome to{" "}
 				<Text
-					variant="gradient"
-					gradient={{ from: "teaGreen", to: "teaGreen.2", deg: 45 }}
 					inherit
 					component="span"
+					sx={(theme) => ({ color: theme.colors.freshBlue[5] })}
 				>
 					Trackfic
 				</Text>

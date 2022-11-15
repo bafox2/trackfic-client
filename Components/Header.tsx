@@ -15,7 +15,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ColorSchemeToggle from "../ColorSchemeToggle/ColorSchemeToggle";
+import ColorSchemeToggle from "./ColorSchemeToggle";
 
 const useStyles = createStyles((theme) => ({
 	link: {

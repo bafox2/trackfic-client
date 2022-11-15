@@ -1,5 +1,5 @@
-import { Welcome } from "../Components/Welcome/Welcome";
-import ColorSchemeToggle from "../Components/ColorSchemeToggle/ColorSchemeToggle";
+import { Welcome } from "../Components/Welcome";
+import ColorSchemeToggle from "../Components/ColorSchemeToggle";
 import { GetStaticProps } from "next";
 import maps from "../public/maps.png";
 import {

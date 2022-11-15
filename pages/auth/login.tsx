@@ -80,7 +80,6 @@ export default function AuthenticationImage() {
 	});
 
 	const onSubmit = async (values: CreateSessionInput) => {
-		console.log(process.env.NEXT_PUBLIC_API_URL);
 		try {
 			const response = await fetch(
 				`${process.env.NEXT_PUBLIC_API_URL}/api/sessions`,
@@ -94,19 +93,17 @@ export default function AuthenticationImage() {
 				}
 			);
 			const data = await response.json();
-			console.log(data, "data");
 			if (data.errors) {
 				setLoginError(data.errors[0].message);
+				return;
 			}
 		} catch (error: any) {
-			setLoginError(error);
-			console.log(error, "error");
+			setLoginError(error?.message);
+			return;
 		}
-		router.reload();
+
 		router.push("/dashboard");
 	};
-
-	console.log({ errors });
 
 	return (
 		<div className={classes.wrapper}>

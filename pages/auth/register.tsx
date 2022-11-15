@@ -92,7 +92,6 @@ export default function AuthRegister() {
 	const [registerError, setRegisterError] = useState();
 
 	async function onSubmit(values: CreateUserInput) {
-		console.log(process.env.NEXT_PUBLIC_API_URL);
 		try {
 			const response = await fetch(
 				`${process.env.NEXT_PUBLIC_API_URL}/api/users`,
@@ -108,7 +107,6 @@ export default function AuthRegister() {
 			const data = await response.json();
 
 			router.push("/login");
-			console.log(data);
 		} catch (error: any) {
 			setRegisterError(error.message);
 			console.log(error);

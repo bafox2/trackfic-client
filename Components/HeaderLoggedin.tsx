@@ -15,7 +15,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import ColorSchemeToggle from "../ColorSchemeToggle/ColorSchemeToggle";
+import ColorSchemeToggle from "./ColorSchemeToggle";
 
 const useStyles = createStyles((theme) => ({
 	link: {
@@ -86,7 +86,7 @@ const useStyles = createStyles((theme) => ({
 	},
 }));
 
-export default function HeaderMegaMenu({ logout }: { logout: () => void }) {
+export default function HeaderLoggedInMenu({ logout }: { logout: () => void }) {
 	const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
 		useDisclosure(false);
 	const { classes, theme } = useStyles();

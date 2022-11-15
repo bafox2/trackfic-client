@@ -1,4 +1,4 @@
-import AccordionController from "../Components/AccordionController/AccordionController";
+import AccordionController from "../Components/AccordionController";
 import { Title } from "@mantine/core";
 const apiData = [
 	{

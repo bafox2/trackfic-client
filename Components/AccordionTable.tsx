@@ -1,15 +1,5 @@
-import { useState } from "react";
-import {
-	createStyles,
-	Table,
-	ScrollArea,
-	Text,
-	Group,
-	UnstyledButton,
-	Center,
-} from "@mantine/core";
-import { keys } from "@mantine/utils";
-import { IconSelector, IconChevronDown, IconChevronUp } from "@tabler/icons";
+import { createStyles, Table } from "@mantine/core";
+import { DateTime } from "luxon";
 
 const useStyles = createStyles((theme) => ({
 	header: {
@@ -51,19 +41,6 @@ interface RowDataNode {
 }
 [];
 
-const dummyData = [
-	{
-		__v: 0,
-		_id: "60a6b1b0b0b5b00015b0b0b0",
-		durationGeneral: 0,
-		durationNow: 0,
-		timeRequested: "2021-05-18T00:00:00.000Z",
-		trip: "60a6b1b0b0b5b00015b0b0b0",
-		createdAt: "2021-05-18T00:00:00.000Z",
-		updatedAt: "2021-05-18T00:00:00.000Z",
-	},
-];
-
 export default function TableData({ data }: RowDataNode | any) {
 	const { classes, cx } = useStyles();
 	if (data.length === 0) {
@@ -74,7 +51,6 @@ export default function TableData({ data }: RowDataNode | any) {
 						<tr>
 							<th>Date</th>
 							<th>Time</th>
-							<th>Estimate</th>
 							<th>Estimate with Traffic</th>
 						</tr>
 					</thead>
@@ -88,12 +64,26 @@ export default function TableData({ data }: RowDataNode | any) {
 		);
 	}
 
+	const transformTimeData = (time: string) => {
+		const timeObject = DateTime.fromISO(time);
+		return timeObject.toLocaleString(DateTime.TIME_SIMPLE);
+	};
+
+	const transformDurationData = (duration: number) => {
+		const hours = Math.floor(duration / 3600);
+		const minutes = Math.floor((duration % 3600) / 60);
+		const seconds = Math.floor((duration % 3600) % 60);
+		if (hours === 0) {
+			return `${minutes}m ${seconds}s`;
+		}
+		return `${hours}h ${minutes}m ${seconds}s`;
+	};
+
 	const rows = data.map((row: RowDataNode) => (
 		<tr key={row._id}>
 			<td>{row.createdAt.slice(0, 10)}</td>
-			<td>{row.createdAt.slice(11, 16)}</td>
-			<td>{row.durationGeneral}</td>
-			<td>{row.durationNow}</td>
+			<td>{transformTimeData(row.createdAt)}</td>
+			<td>{transformDurationData(row.durationNow)}</td>
 		</tr>
 	));
 
@@ -104,7 +94,6 @@ export default function TableData({ data }: RowDataNode | any) {
 					<tr>
 						<th>Date</th>
 						<th>Time</th>
-						<th>Estimate</th>
 						<th>Estimate with Traffic</th>
 					</tr>
 				</thead>

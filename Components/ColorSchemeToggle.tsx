@@ -7,7 +7,7 @@ export default function ColorSchemeToggle() {
 	return (
 		<ActionIcon
 			onClick={() => toggleColorScheme()}
-			size="xl"
+			size={"lg"}
 			sx={(theme) => ({
 				backgroundColor:
 					theme.colorScheme === "dark"
@@ -18,12 +18,14 @@ export default function ColorSchemeToggle() {
 						? theme.colors.yellow[4]
 						: theme.colors.blue[6],
 				marginTop: 0,
+				height: 36,
+				width: 36,
 			})}
 		>
 			{colorScheme === "dark" ? (
-				<IconSun size={20} stroke={1.5} />
+				<IconSun size={24} stroke={1.5} />
 			) : (
-				<IconMoonStars size={20} stroke={1.5} />
+				<IconMoonStars size={24} stroke={2.5} />
 			)}
 		</ActionIcon>
 	);
