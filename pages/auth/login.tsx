@@ -158,8 +158,7 @@ export default function AuthenticationImage() {
 					</Text>
 					<Divider sx={{ marginTop: "10px" }}></Divider>
 					<Text align="center" mt="md">
-						Don&apos;t want to make an account, but still want to get a feel of
-						my development?{" "}
+						Recruiter?{" "}
 						<Anchor<"a">
 							href="#"
 							weight={700}
