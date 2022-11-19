@@ -1,5 +1,5 @@
-import { ActionIcon, Group, useMantineColorScheme } from "@mantine/core";
-import { IconSun, IconMoonStars } from "@tabler/icons";
+import { ActionIcon, Group, useMantineColorScheme } from '@mantine/core';
+import { IconSun, IconMoonStars } from '@tabler/icons';
 
 export default function ColorSchemeToggle() {
 	const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -7,14 +7,14 @@ export default function ColorSchemeToggle() {
 	return (
 		<ActionIcon
 			onClick={() => toggleColorScheme()}
-			size={"lg"}
+			size={'lg'}
 			sx={(theme) => ({
 				backgroundColor:
-					theme.colorScheme === "dark"
+					theme.colorScheme === 'dark'
 						? theme.colors.dark[6]
 						: theme.colors.gray[0],
 				color:
-					theme.colorScheme === "dark"
+					theme.colorScheme === 'dark'
 						? theme.colors.yellow[4]
 						: theme.colors.blue[6],
 				marginTop: 0,
@@ -22,7 +22,7 @@ export default function ColorSchemeToggle() {
 				width: 36,
 			})}
 		>
-			{colorScheme === "dark" ? (
+			{colorScheme === 'dark' ? (
 				<IconSun size={24} stroke={1.5} />
 			) : (
 				<IconMoonStars size={24} stroke={2.5} />

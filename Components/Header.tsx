@@ -11,57 +11,57 @@ import {
 	Burger,
 	Drawer,
 	ScrollArea,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import ColorSchemeToggle from "./ColorSchemeToggle";
+} from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import ColorSchemeToggle from './ColorSchemeToggle';
 
 const useStyles = createStyles((theme) => ({
 	link: {
-		display: "flex",
-		alignItems: "center",
-		height: "100%",
+		display: 'flex',
+		alignItems: 'center',
+		height: '100%',
 		paddingLeft: theme.spacing.md,
 		paddingRight: theme.spacing.md,
-		textDecoration: "none",
-		color: theme.colorScheme === "dark" ? theme.white : theme.black,
+		textDecoration: 'none',
+		color: theme.colorScheme === 'dark' ? theme.white : theme.black,
 		fontWeight: 500,
 		fontSize: theme.fontSizes.sm,
 
-		[theme.fn.smallerThan("sm")]: {
+		[theme.fn.smallerThan('sm')]: {
 			height: 42,
-			display: "flex",
-			alignItems: "center",
-			width: "100%",
+			display: 'flex',
+			alignItems: 'center',
+			width: '100%',
 		},
 
 		...theme.fn.hover({
 			backgroundColor:
-				theme.colorScheme === "dark"
+				theme.colorScheme === 'dark'
 					? theme.colors.dark[6]
 					: theme.colors.gray[0],
 		}),
 	},
 
 	subLink: {
-		width: "100%",
+		width: '100%',
 		padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
 		borderRadius: theme.radius.md,
 
 		...theme.fn.hover({
 			backgroundColor:
-				theme.colorScheme === "dark"
+				theme.colorScheme === 'dark'
 					? theme.colors.dark[7]
 					: theme.colors.gray[0],
 		}),
 
-		"&:active": theme.activeStyles,
+		'&:active': theme.activeStyles,
 	},
 
 	dropdownFooter: {
 		backgroundColor:
-			theme.colorScheme === "dark"
+			theme.colorScheme === 'dark'
 				? theme.colors.dark[7]
 				: theme.colors.gray[0],
 		margin: -theme.spacing.md,
@@ -69,19 +69,19 @@ const useStyles = createStyles((theme) => ({
 		padding: `${theme.spacing.md}px ${theme.spacing.md * 2}px`,
 		paddingBottom: theme.spacing.xl,
 		borderTop: `1px solid ${
-			theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
+			theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
 		}`,
 	},
 
 	hiddenMobile: {
-		[theme.fn.smallerThan("sm")]: {
-			display: "none",
+		[theme.fn.smallerThan('sm')]: {
+			display: 'none',
 		},
 	},
 
 	hiddenDesktop: {
-		[theme.fn.largerThan("sm")]: {
-			display: "none",
+		[theme.fn.largerThan('sm')]: {
+			display: 'none',
 		},
 	},
 }));
@@ -95,17 +95,17 @@ export default function HeaderMegaMenu() {
 	return (
 		<Box pb={1}>
 			<Header height={60} px="md">
-				<Group position="apart" sx={{ height: "100%" }}>
-					<Group sx={{ marginLeft: "10px" }}>
+				<Group position="apart" sx={{ height: '100%' }}>
+					<Group sx={{ marginLeft: '10px' }}>
 						<Link href="/" passHref>
 							<Text
 								sx={() => ({
-									transform: "rotateY(180deg)",
-									marginLeft: "12px",
-									marginTop: "4px",
-									backgroundColor: "transparent",
-									fontSize: "40px",
-									cursor: "pointer",
+									transform: 'rotateY(180deg)',
+									marginLeft: '12px',
+									marginTop: '4px',
+									backgroundColor: 'transparent',
+									fontSize: '40px',
+									cursor: 'pointer',
 								})}
 							>
 								🚙
@@ -113,15 +113,15 @@ export default function HeaderMegaMenu() {
 						</Link>
 						<Link href="/" passHref>
 							<Text
-								size={"xl"}
+								size={'xl'}
 								weight={700}
 								sx={() => ({
-									backgroundColor: "transparent",
-									marginLeft: "-78px",
-									marginBottom: "17px",
-									marginTop: "-20px",
-									fontSize: "20px",
-									cursor: "pointer",
+									backgroundColor: 'transparent',
+									marginLeft: '-78px',
+									marginBottom: '17px',
+									marginTop: '-20px',
+									fontSize: '20px',
+									cursor: 'pointer',
 								})}
 							>
 								Trackfic
@@ -129,12 +129,12 @@ export default function HeaderMegaMenu() {
 						</Link>
 					</Group>
 					<Group
-						sx={{ height: "100%", marginTop: "-5px" }}
+						sx={{ height: '100%', marginTop: '-5px' }}
 						spacing={10}
 						className={classes.hiddenMobile}
 					>
 						<div
-							style={{ display: "flex", alignItems: "center", height: "100%" }}
+							style={{ display: 'flex', alignItems: 'center', height: '100%' }}
 						>
 							{/* <Link href="/example" passHref>
 								<NavLink
@@ -191,17 +191,17 @@ export default function HeaderMegaMenu() {
 				className={classes.hiddenDesktop}
 				zIndex={1000000}
 			>
-				<ScrollArea sx={{ height: "calc(95vh - 60px)" }} mx="-md">
+				<ScrollArea sx={{ height: 'calc(95vh - 60px)' }} mx="-md">
 					<Divider
 						my="sm"
-						color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+						color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
 					/>
 					<Link href="/example" passHref>
 						<NavLink
 							className={classes.link}
 							component="a"
 							label="Example"
-							active={router.pathname === "/example"}
+							active={router.pathname === '/example'}
 						/>
 					</Link>
 					<Link href="/about" passHref>
@@ -209,12 +209,12 @@ export default function HeaderMegaMenu() {
 							className={classes.link}
 							component="a"
 							label="About"
-							active={router.pathname === "/about"}
+							active={router.pathname === '/about'}
 						/>
 					</Link>
 					<Divider
 						my="sm"
-						color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+						color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
 					/>
 
 					<Group position="center" grow pb="xl" px="md">

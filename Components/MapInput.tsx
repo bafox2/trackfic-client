@@ -1,16 +1,16 @@
-import { useState, useRef, useMemo } from "react";
-import { Autocomplete, Loader, AutocompleteItem } from "@mantine/core";
-import { useDebouncedValue } from "@mantine/hooks";
-import useSWR from "swr";
-import fetcher from "../utils/mapFetch";
-import { Controller, useForm } from "react-hook-form";
+import { useState, useRef, useMemo } from 'react';
+import { Autocomplete, Loader, AutocompleteItem } from '@mantine/core';
+import { useDebouncedValue } from '@mantine/hooks';
+import useSWR from 'swr';
+import fetcher from '../utils/mapFetch';
+import { Controller, useForm } from 'react-hook-form';
 import {
 	IconDots,
 	IconCurrentLocation,
 	IconCheck,
 	TablerIcon,
 	IconZoomQuestion,
-} from "@tabler/icons";
+} from '@tabler/icons';
 
 export function MapInput(props: any) {
 	//query has windowcleartimeout and timeoutrefcurrent for some reason ?
@@ -23,7 +23,7 @@ export function MapInput(props: any) {
 		features: any[];
 		attribution: string;
 	}
-	const [value, setValue] = useState("");
+	const [value, setValue] = useState('');
 	const [selected, setSelected] = useState(false);
 	const debouncedValue = useDebouncedValue(value, 500);
 	const { data, error, isValidating } = useSWR<Idata | null>(
@@ -57,13 +57,13 @@ export function MapInput(props: any) {
 			render={({ field: { onChange, value } }) => (
 				<Autocomplete
 					rightSection={
-						value == "" ? (
+						value == '' ? (
 							<IconCurrentLocation /> //thing is blank iconcurrent
 						) : value !== debouncedValue[0] ? (
 							<IconDots /> //the thing is loading icondots
 						) : selected == true ? (
 							<IconCheck /> //the thing is selected
-						) : value !== "" && debouncedValue[0] == value ? (
+						) : value !== '' && debouncedValue[0] == value ? (
 							<IconZoomQuestion /> //thing has no data
 						) : isValidating ? (
 							<IconDots /> //maybe an isvalidating state?
@@ -72,7 +72,7 @@ export function MapInput(props: any) {
 						)
 					}
 					nothingFound={
-						value !== "" && debouncedValue[0] == value ? "No results found" : ""
+						value !== '' && debouncedValue[0] == value ? 'No results found' : ''
 					}
 					label={props.label}
 					placeholder={props.placeholder}
@@ -84,13 +84,13 @@ export function MapInput(props: any) {
 						setValue(value);
 						onChange(value);
 					}}
-					defaultValue={props.defaultValue ? props.defaultValue : ""}
+					defaultValue={props.defaultValue ? props.defaultValue : ''}
 					data={items}
 					error={error}
 					sx={{
-						width: "50%",
-						"@media (max-width: 768px)": {
-							width: "100%",
+						width: '50%',
+						'@media (max-width: 768px)': {
+							width: '100%',
 						},
 					}}
 				/>

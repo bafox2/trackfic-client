@@ -6,7 +6,7 @@ import {
 	Anchor,
 	Stack,
 	Group,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
 	IconBrandReact,
 	IconBrandNextjs,
@@ -20,29 +20,29 @@ import {
 	IconBrandGoogle,
 	IconBrandStackoverflow,
 	IconBrandNpm,
-} from "@tabler/icons";
-import { ReactNode } from "react";
-import Link from "next/link";
+} from '@tabler/icons';
+import { ReactNode } from 'react';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
 	card: {
-		position: "relative",
-		cursor: "pointer",
-		overflow: "hidden",
-		transition: "transform 150ms ease, box-shadow 100ms ease",
+		position: 'relative',
+		cursor: 'pointer',
+		overflow: 'hidden',
+		transition: 'transform 150ms ease, box-shadow 100ms ease',
 		padding: theme.spacing.xl,
 		paddingLeft: theme.spacing.xl * 2,
 		marginBottom: theme.spacing.xl * 2,
-		fontFamily: "Red Hat Text",
+		fontFamily: 'Red Hat Text',
 
-		"&:hover": {
+		'&:hover': {
 			boxShadow: theme.shadows.md,
-			transform: "scale(1.02)",
+			transform: 'scale(1.02)',
 		},
 
-		"&::before": {
+		'&::before': {
 			content: '""',
-			position: "absolute",
+			position: 'absolute',
 			top: 0,
 			bottom: 0,
 			left: 0,
@@ -64,120 +64,120 @@ export default function appCards() {
 
 	const apps = [
 		{
-			title: "Cron",
+			title: 'Cron',
 			description:
-				"Cron is a web app that allows you to schedule tasks to run on a schedule.",
-			link: "https://www.npmjs.com/package/cron",
-			color1: "#0FF000",
-			color2: "#FAAFFF",
+				'Cron is a web app that allows you to schedule tasks to run on a schedule.',
+			link: 'https://www.npmjs.com/package/cron',
+			color1: '#0FF000',
+			color2: '#FAAFFF',
 			icon: IconCalendarTime,
 		},
 		{
-			title: "OpenMap",
+			title: 'OpenMap',
 			description:
-				"OpenMap is a web app that allows you to view the locations of your favorite stories on fanfiction.net.",
-			link: "https://openmap.vercel.app/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'OpenMap is a web app that allows you to view the locations of your favorite stories on fanfiction.net.',
+			link: 'https://openmap.vercel.app/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconMap,
 		},
 		{
-			title: "Mantine",
+			title: 'Mantine',
 			description:
-				"Mantine is a React UI library that allows you to create beautiful and accessible web apps.",
-			link: "https://mantine.dev/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Mantine is a React UI library that allows you to create beautiful and accessible web apps.',
+			link: 'https://mantine.dev/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandMantine,
 		},
 		{
-			title: "Nextjs",
+			title: 'Nextjs',
 			description:
-				"Nextjs is a React framework that allows you to create server-side rendered web apps.",
-			link: "https://nextjs.org/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Nextjs is a React framework that allows you to create server-side rendered web apps.',
+			link: 'https://nextjs.org/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandNextjs,
 		},
 		{
-			title: "Typescript",
+			title: 'Typescript',
 			description:
-				"Typescript is a superset of Javascript that allows you to write more robust code.",
-			link: "https://www.typescriptlang.org/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Typescript is a superset of Javascript that allows you to write more robust code.',
+			link: 'https://www.typescriptlang.org/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconSquareLetterT,
 		},
 		{
-			title: "React",
+			title: 'React',
 			description:
-				"React is a Javascript library that allows you to create interactive web apps.",
-			link: "https://reactjs.org/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'React is a Javascript library that allows you to create interactive web apps.',
+			link: 'https://reactjs.org/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandReact,
 		},
 		{
-			title: "Jest",
+			title: 'Jest',
 			description:
-				"Jest is a Javascript testing framework that allows you to write tests for your code.",
-			link: "https://jestjs.io/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Jest is a Javascript testing framework that allows you to write tests for your code.',
+			link: 'https://jestjs.io/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBuildingCircus,
 		},
 		{
-			title: "Express",
+			title: 'Express',
 			description:
-				"Express is a Node.js framework that allows you to create web servers.",
-			link: "https://expressjs.com/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Express is a Node.js framework that allows you to create web servers.',
+			link: 'https://expressjs.com/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconHexagonLetterE,
 		},
 		{
-			title: "Mongoose",
+			title: 'Mongoose',
 			description:
-				"Mongoose is a Node.js library that allows you to interact with MongoDB.",
-			link: "https://mongoosejs.com/",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Mongoose is a Node.js library that allows you to interact with MongoDB.',
+			link: 'https://mongoosejs.com/',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandReact,
 		},
 		{
-			title: "Zod",
+			title: 'Zod',
 			description:
-				"Zod is a Typescript library that allows you to write schemas for your data.",
-			link: "zohttps://github.com/colinhacks/zod",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Zod is a Typescript library that allows you to write schemas for your data.',
+			link: 'zohttps://github.com/colinhacks/zod',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconDiamond,
 		},
 		{
-			title: "Google Maps",
+			title: 'Google Maps',
 			description:
-				"Google Maps is a Javascript library that allows you to create interactive maps.",
-			link: "https://developers.google.com/maps/documentation/javascript/overview",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Google Maps is a Javascript library that allows you to create interactive maps.',
+			link: 'https://developers.google.com/maps/documentation/javascript/overview',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandGoogle,
 		},
 		{
-			title: "Stack Overflow",
+			title: 'Stack Overflow',
 			description:
-				"Google Maps is a Javascript library that allows you to create interactive maps.",
-			link: "https://developers.google.com/maps/documentation/javascript/overview",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Google Maps is a Javascript library that allows you to create interactive maps.',
+			link: 'https://developers.google.com/maps/documentation/javascript/overview',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandStackoverflow,
 		},
 		{
-			title: "NPM",
+			title: 'NPM',
 			description:
-				"Google Maps is a Javascript library that allows you to create interactive maps.",
-			link: "https://developers.google.com/maps/documentation/javascript/overview",
-			color1: "#f5f5f5",
-			color2: "#f5f5f5",
+				'Google Maps is a Javascript library that allows you to create interactive maps.',
+			link: 'https://developers.google.com/maps/documentation/javascript/overview',
+			color1: '#f5f5f5',
+			color2: '#f5f5f5',
 			icon: IconBrandNpm,
 		},
 	];
@@ -189,7 +189,7 @@ export default function appCards() {
 					className={classes.icon}
 					size="xl"
 					radius="md"
-					color={"#FFFFFF"}
+					color={'#FFFFFF'}
 				>
 					<app.icon color="#7CD657" />
 				</ThemeIcon>

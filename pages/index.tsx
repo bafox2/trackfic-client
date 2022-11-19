@@ -1,7 +1,5 @@
-import { Welcome } from "../Components/Welcome";
-import ColorSchemeToggle from "../Components/ColorSchemeToggle";
-import { GetStaticProps } from "next";
-import maps from "../public/maps.png";
+import Link from 'next/link';
+import { GetStaticProps } from 'next';
 import {
 	Title,
 	Text,
@@ -13,22 +11,23 @@ import {
 	Divider,
 	Group,
 	Stack,
-} from "@mantine/core";
-import Link from "next/link";
+} from '@mantine/core';
+import { Welcome } from '../Components/Welcome';
+import ColorSchemeToggle from '../Components/ColorSchemeToggle';
 
 const useStyles = createStyles((theme) => ({
 	wrapper: {
-		position: "relative",
+		position: 'relative',
 		paddingTop: 180,
 		paddingBottom: 130,
-		"@media (max-width: 520px)": {
+		'@media (max-width: 520px)': {
 			paddingTop: 80,
 			paddingBottom: 50,
 		},
 	},
 
 	inner: {
-		position: "relative",
+		position: 'relative',
 		zIndex: 1,
 	},
 
@@ -40,12 +39,12 @@ const useStyles = createStyles((theme) => ({
 		paddingRight: theme.spacing.md,
 		color: theme.white,
 		marginBottom: theme.spacing.xs,
-		textAlign: "center",
+		textAlign: 'center',
 		fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 
-		"@media (max-width: 520px)": {
+		'@media (max-width: 520px)': {
 			fontSize: 28,
-			textAlign: "left",
+			textAlign: 'left',
 		},
 	},
 
@@ -55,23 +54,23 @@ const useStyles = createStyles((theme) => ({
 
 	description: {
 		color: theme.colors.platinum[2],
-		textAlign: "center",
+		textAlign: 'center',
 
-		"@media (max-width: 520px)": {
+		'@media (max-width: 520px)': {
 			fontSize: theme.fontSizes.md,
-			textAlign: "left",
+			textAlign: 'left',
 		},
 	},
 
 	controls: {
 		marginTop: theme.spacing.xl * 1.5,
-		display: "flex",
-		justifyContent: "center",
+		display: 'flex',
+		justifyContent: 'center',
 		paddingLeft: theme.spacing.md,
 		paddingRight: theme.spacing.md,
 
-		"@media (max-width: 520px)": {
-			flexDirection: "column",
+		'@media (max-width: 520px)': {
+			flexDirection: 'column',
 		},
 	},
 
@@ -79,12 +78,12 @@ const useStyles = createStyles((theme) => ({
 		height: 42,
 		fontSize: theme.fontSizes.md,
 
-		"&:not(:first-of-type)": {
+		'&:not(:first-of-type)': {
 			marginLeft: theme.spacing.md,
 		},
 
-		"@media (max-width: 520px)": {
-			"&:not(:first-of-type)": {
+		'@media (max-width: 520px)': {
+			'&:not(:first-of-type)': {
 				marginTop: theme.spacing.md,
 				marginLeft: 0,
 			},
@@ -93,35 +92,35 @@ const useStyles = createStyles((theme) => ({
 
 	secondaryControl: {
 		color: theme.white,
-		backgroundColor: "rgba(255, 255, 255, .4)",
+		backgroundColor: 'rgba(255, 255, 255, .4)',
 
-		"&:hover": {
-			backgroundColor: "rgba(255, 255, 255, .45) !important",
+		'&:hover': {
+			backgroundColor: 'rgba(255, 255, 255, .45) !important',
 		},
 	},
 	root: {
-		display: "flex",
+		display: 'flex',
 		border: `1px solid ${theme.colors.freshBlue[4]}`,
 		padding: theme.spacing.xl * 1.5,
 		marginBottom: theme.spacing.xl * 1.5,
 		marginTop: theme.spacing.xl * 1.5,
 		borderRadius: theme.radius.md,
 
-		[theme.fn.smallerThan("sm")]: {
-			flexDirection: "column",
-			width: "70%",
+		[theme.fn.smallerThan('sm')]: {
+			flexDirection: 'column',
+			width: '70%',
 		},
 	},
 
 	stat: {
 		flex: 1,
 
-		"& + &": {
+		'& + &': {
 			paddingLeft: theme.spacing.xl,
 			marginLeft: theme.spacing.xl,
 			borderLeft: `1px solid ${theme.colors.freshBlue[2]}`,
 
-			[theme.fn.smallerThan("sm")]: {
+			[theme.fn.smallerThan('sm')]: {
 				paddingLeft: 0,
 				marginLeft: 0,
 				borderLeft: 0,
@@ -147,7 +146,7 @@ const useStyles = createStyles((theme) => ({
 	},
 	titleStat: {
 		color: theme.colors.teaGreen[5],
-		textTransform: "uppercase",
+		textTransform: 'uppercase',
 		fontWeight: 700,
 		fontSize: theme.fontSizes.sm,
 	},
@@ -177,7 +176,7 @@ export default function HomePage({ data }: StatsGroupProps) {
 				<Overlay color="#000" opacity={0.5} zIndex={1} />
 				<div className={classes.inner}>
 					<Title className={classes.title}>
-						Google Maps Information{" "}
+						Google Maps Information{' '}
 						<Text component="span" inherit className={classes.highlight}>
 							Automated
 						</Text>
@@ -208,9 +207,9 @@ export default function HomePage({ data }: StatsGroupProps) {
 					</div>
 				</div>
 			</BackgroundImage>
-			<Stack sx={{ marginBottom: "25px" }} align={"center"}>
+			<Stack sx={{ marginBottom: '25px' }} align={'center'}>
 				<Welcome />
-				<Group sx={{ gap: "30px" }}>
+				<Group sx={{ gap: '30px' }}>
 					<Link href="/example" passHref>
 						<Button size="xl" variant="light" component="a" href="/example">
 							Example
@@ -223,7 +222,7 @@ export default function HomePage({ data }: StatsGroupProps) {
 					</Link>
 				</Group>
 			</Stack>
-			<Divider />
+			<Divider size="sm" color="blue.1" />
 
 			<Container size={640} className={classes.root}>
 				{stats}
@@ -237,19 +236,19 @@ export default function HomePage({ data }: StatsGroupProps) {
 export const getStaticProps: GetStaticProps = () => {
 	const data = [
 		{
-			title: "Users",
-			stats: "36",
-			description: "All time users who have made a trip",
+			title: 'Users',
+			stats: '36',
+			description: 'All time users who have made a trip',
 		},
 		{
-			title: "Trips",
-			stats: "102",
-			description: "From Alaska to Florida",
+			title: 'Trips',
+			stats: '102',
+			description: 'From Alaska to Florida',
 		},
 		{
-			title: "Nodes",
-			stats: "1,400",
-			description: "Data to help you decide when to go",
+			title: 'Nodes',
+			stats: '1,400',
+			description: 'Data to help you decide when to go',
 		},
 	];
 

@@ -4,17 +4,18 @@ import {
 	AccordionControlProps,
 	Box,
 	Text,
-} from "@mantine/core";
+	useInputProps,
+} from '@mantine/core';
 import {
 	IconPlayerPause,
 	IconEdit,
 	IconTrashX,
 	IconPlayerPlay,
-} from "@tabler/icons";
-import AccordionHeader from "./AccordionHeader";
-import AccordionTable from "./AccordionTable";
-import { useRouter } from "next/router";
-import { mutate } from "swr";
+} from '@tabler/icons';
+import AccordionHeader from './AccordionHeader';
+import AccordionTable from './AccordionTable';
+import { useRouter } from 'next/router';
+import { mutate } from 'swr';
 
 interface AccordionControllerProps {
 	data: {
@@ -65,21 +66,22 @@ interface CustomAccordionControlProps extends AccordionControlProps {
 		schedule: string;
 		title: string;
 	}[];
+	onDelete: (id: string) => void;
 }
 
 function AccordionControl(props: CustomAccordionControlProps) {
 	const router = useRouter();
 	const onPause = async (id: string) => {
 		fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trips/${id}/pause`, {
-			method: "PUT",
+			method: 'PUT',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
-			credentials: "include",
+			credentials: 'include',
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("api response", data);
+				console.log('api response', data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -97,6 +99,8 @@ function AccordionControl(props: CustomAccordionControlProps) {
 		const options = {
 			optimisticData: newData,
 			rollbackOnError: true,
+			populateCache: true,
+			revalidate: true,
 		};
 		mutate(
 			`${process.env.NEXT_PUBLIC_API_URL}/api/me/nodes`,
@@ -104,13 +108,6 @@ function AccordionControl(props: CustomAccordionControlProps) {
 			options
 		);
 	};
-
-	//use mutate from useSWR with the key `${process.env.NEXT_PUBLIC_API_URL}/api/me/nodes` to update the data
-	//use the mutate function to update the data
-	//use the mutate function to update the data
-	//use the mutate function to update the data
-	//use the mutate function to update the data
-	//use the mutate function to update the data
 
 	const onDeleteUI = async (id: string) => {
 		const newData = props.swrdata.filter((trip) => trip._id !== id);
@@ -124,31 +121,30 @@ function AccordionControl(props: CustomAccordionControlProps) {
 			newData,
 			options
 		);
-
 		onDelete(id);
 	};
 
 	const onEdit = (data: object) => {
 		router.push(
 			{
-				pathname: "/dashboard/query",
+				pathname: '/dashboard/query',
 				query: { data: JSON.stringify(data) },
 			},
-			"/dashboard/query"
+			'/dashboard/query'
 		);
 	};
 
 	const onDelete = async (id: string) => {
 		fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trips/${id}`, {
-			method: "DELETE",
+			method: 'DELETE',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
-			credentials: "include",
+			credentials: 'include',
 		}).then((res) => res.json());
 	};
 	return (
-		<Box sx={{ display: "flex", alignItems: "center" }}>
+		<Box sx={{ display: 'flex', alignItems: 'center' }}>
 			<Accordion.Control {...props} />
 			{props.data.active ? (
 				<ActionIcon onClick={() => onPauseUI(props.data._id)} size="lg">
@@ -161,8 +157,8 @@ function AccordionControl(props: CustomAccordionControlProps) {
 			)}
 			<ActionIcon onClick={() => onEdit(props)} size="lg">
 				<IconEdit size={16} />
-			</ActionIcon>{" "}
-			<ActionIcon onClick={() => onDeleteUI(props.data._id)} size="lg">
+			</ActionIcon>{' '}
+			<ActionIcon onClick={() => props.onDelete(props.data._id)} size="lg">
 				<IconTrashX size={16} />
 			</ActionIcon>
 		</Box>
@@ -172,12 +168,13 @@ function AccordionControl(props: CustomAccordionControlProps) {
 export default function AccordionController({
 	data,
 	swrdata,
+	onDelete,
 }: any | AccordionControllerProps) {
 	return (
 		<>
 			<Accordion chevronPosition="left" sx={{ minWidth: 500 }} mx="sm">
 				<Accordion.Item value="a">
-					<AccordionControl swrdata={swrdata} data={data}>
+					<AccordionControl swrdata={swrdata} data={data} onDelete={onDelete}>
 						{data.title}
 					</AccordionControl>
 					<Accordion.Panel>

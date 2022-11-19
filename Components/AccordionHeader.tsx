@@ -6,15 +6,15 @@ import {
 	ThemeIcon,
 	Stack,
 	Divider,
-} from "@mantine/core";
+} from '@mantine/core';
 import {
 	IconRoute2,
 	IconPennant,
 	IconCurrentLocation,
 	IconClock,
 	IconCalculator,
-} from "@tabler/icons";
-import { DateTime } from "luxon";
+} from '@tabler/icons';
+import { DateTime } from 'luxon';
 
 const useStyles = createStyles((theme) => ({}));
 
@@ -54,12 +54,12 @@ const transformDurationData = (duration: number) => {
 export default function AccordionHeader({ data }: AccordionHeaderProps) {
 	return (
 		<>
-			<Group sx={{ marginBottom: "15px" }}>
+			<Group sx={{ marginBottom: '15px' }}>
 				<Stack align="flex-start" spacing="xl">
 					<Group>
 						<ThemeIcon
-							color={"blue"}
-							variant={"outline"}
+							color={'blue'}
+							variant={'outline'}
 							size={32}
 							sx={(theme) => ({ color: theme.colors.freshBlue[3] })}
 						>
@@ -69,8 +69,8 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 					</Group>
 					<Group>
 						<ThemeIcon
-							color={"green"}
-							variant={"outline"}
+							color={'green'}
+							variant={'outline'}
 							size={32}
 							sx={(theme) => ({ color: theme.colors.teaGreen[6] })}
 						>
@@ -81,8 +81,8 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 					</Group>
 					<Group>
 						<ThemeIcon
-							color={"gray"}
-							variant={"outline"}
+							color={'gray'}
+							variant={'outline'}
 							size={32}
 							sx={(theme) => ({ color: theme.colors.platinum[6] })}
 						>
@@ -95,8 +95,8 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 				<Stack>
 					<Group>
 						<ThemeIcon
-							color={"gray"}
-							variant={"outline"}
+							color={'gray'}
+							variant={'outline'}
 							size={64}
 							sx={(theme) => ({ color: theme.colors.gray[9] })}
 						>
@@ -107,7 +107,7 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 								? `Average trip estimate: ${transformDurationData(
 										data.tripNodes[0].durationGeneral
 								  )}`
-								: "Waiting for first trip node confimation!"}
+								: 'Waiting for first trip node confimation!'}
 						</Text>
 					</Group>
 				</Stack>

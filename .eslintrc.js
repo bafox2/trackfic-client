@@ -3,7 +3,6 @@ module.exports = {
     'mantine',
     'plugin:@next/next/recommended',
     'plugin:jest/recommended',
-    'plugin:storybook/recommended',
   ],
   plugins: ['testing-library', 'jest'],
   overrides: [
@@ -17,5 +16,12 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'no-tabs': 'off',
+    'react/jsx-curly-brace-presence': 'off',
+    'react/jsx-indent-props': 'off',
+    '@typescript-eslint/quotes': 'off',
+    'prefer-const': 'off',
+    'no-sequences': 'off',
+    'no-param-reassign': 'off',
   },
 };

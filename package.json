@@ -43,7 +43,6 @@
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@next/eslint-plugin-next": "^12.1.4",
-    "@storybook/react": "^6.5.9",
     "@testing-library/dom": "^8.12.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.0.0",
@@ -55,6 +54,9 @@
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
     "babel-loader": "^8.2.4",
+    "eslint-config-mantine": "^2.0.0",
+    "eslint-plugin-jest": "^27.1.5",
+    "eslint-plugin-testing-library": "^5.9.1",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
     "typescript": "4.8.4"
