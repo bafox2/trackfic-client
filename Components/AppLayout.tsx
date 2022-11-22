@@ -113,7 +113,7 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 						<Text size="sm">
 							<span style={{ fontWeight: 'bolder' }}>Trackfic</span>
 						</Text>
-						<Link href="https://github.com" passHref>
+						<Link href="https://github.com/bafox2" passHref>
 							<a target="_blank" rel="noopener noreferrer">
 								<ActionIcon component={IconBrandGithub}>Next link</ActionIcon>
 							</a>
