@@ -172,6 +172,7 @@ export default function HomePage({ data }: StatsGroupProps) {
 			<BackgroundImage
 				className={classes.wrapper}
 				src="https://uploads-ssl.webflow.com/5c29380b1110ec92a203aa84/5d63e3a75629b8615e85d5b4_image.png"
+				sx={{ paddingLeft: 0, paddingRight: 0 }}
 			>
 				<Overlay color="#000" opacity={0.5} zIndex={1} />
 				<div className={classes.inner}>
