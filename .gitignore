@@ -30,9 +30,23 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+<<<<<<< HEAD
 # vercel
 .vercel
 *.tsbuildinfo
 
 # storybook
 storybook-static
+=======
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.prettierrc
+>>>>>>> f04b806 (init)
