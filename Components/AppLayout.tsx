@@ -1,10 +1,4 @@
-import {
-	AppShell,
-	Footer,
-	Group,
-	Text,
-	ActionIcon,
-} from '@mantine/core';
+import { AppShell, Footer, Group, Text, ActionIcon } from '@mantine/core';
 import { IconBrandGithub } from '@tabler/icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -72,8 +66,8 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 					width: '100vw',
 					height: '100vh',
 				},
-				paddingLeft: 0,
-				paddingRight: 0,
+				paddingLeft: '0 !important',
+				paddingRight: '0 !important',
 			})}
 			fixed
 			header={
