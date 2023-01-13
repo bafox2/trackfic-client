@@ -108,7 +108,7 @@ export default function AuthenticationImage() {
 	const handleShortcut = async () => {
 		try {
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/api/sessions`,
+				`trackfic-backend.trackficdata.online/api/sessions`,
 				{
 					method: 'POST',
 					headers: {
