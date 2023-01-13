@@ -24,8 +24,9 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	form: {
-		borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
-			}`,
+		borderRight: `1px solid ${
+			theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
+		}`,
 		minHeight: 900,
 		maxWidth: 450,
 		paddingTop: 80,
@@ -107,14 +108,16 @@ export default function AuthenticationImage() {
 	const handleShortcut = async () => {
 		try {
 			const response = await fetch(
-				//a request object that points to trackfic-backend.trackficdata.com
-				'https://trackfic-backend.trackficdata.com/api/sessions',
+				`${process.env.NEXT_PUBLIC_API_URL}/api/sessions`,
 				{
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify('lol,'),
+					body: JSON.stringify({
+						email: 'ben@ben.com',
+						password: 'benben',
+					}),
 					credentials: 'include',
 				}
 			);
