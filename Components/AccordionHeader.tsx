@@ -7,6 +7,7 @@ import {
 	Stack,
 	Divider,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import {
 	IconRoute2,
 	IconPennant,
@@ -52,11 +53,19 @@ const transformDurationData = (duration: number) => {
 };
 
 export default function AccordionHeader({ data }: AccordionHeaderProps) {
+	const matchesQuery = useMediaQuery('(min-width: 768px)');
 	return (
 		<>
-			<Group sx={{ marginBottom: '15px' }}>
+			<Group position="left" sx={{ marginBottom: '15px' }}>
 				<Stack align="flex-start" spacing="xl">
-					<Group>
+					<Group
+						sx={(theme) => ({
+							minWidth: '500px',
+							'@media (max-width: 768px)': {
+								minWidth: '100%',
+							},
+						})}
+					>
 						<ThemeIcon
 							color={'blue'}
 							variant={'outline'}
@@ -91,7 +100,15 @@ export default function AccordionHeader({ data }: AccordionHeaderProps) {
 						<Text>Schedule: {data.schedule}</Text>
 					</Group>
 				</Stack>
-				<Divider orientation="vertical" />
+				<Divider
+					orientation={matchesQuery ? 'vertical' : 'horizontal'}
+					sx={(theme) => ({
+						marginRight: '200px',
+						'@media (max-width: 768px)': {
+							marginRight: '0px',
+						},
+					})}
+				/>
 				<Stack>
 					<Group>
 						<ThemeIcon

@@ -23,5 +23,6 @@ module.exports = {
     'prefer-const': 'off',
     'no-sequences': 'off',
     'no-param-reassign': 'off',
+    'no-shadow': 'off',
   },
 };

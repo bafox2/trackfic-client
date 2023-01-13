@@ -24,9 +24,8 @@ const useStyles = createStyles((theme) => ({
 	},
 
 	form: {
-		borderRight: `1px solid ${
-			theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
-		}`,
+		borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
+			}`,
 		minHeight: 900,
 		maxWidth: 450,
 		paddingTop: 80,
@@ -105,6 +104,33 @@ export default function AuthenticationImage() {
 		router.push('/dashboard');
 	};
 
+	const handleShortcut = async () => {
+		try {
+			const response = await fetch(
+				//a request object that points to trackfic-backend.trackficdata.com
+				'https://trackfic-backend.trackficdata.com/api/sessions',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify('lol,'),
+					credentials: 'include',
+				}
+			);
+			const data = await response.json();
+			if (data.errors) {
+				setLoginError(data.errors[0].message);
+				return;
+			}
+		} catch (error: any) {
+			setLoginError(error?.message);
+			return;
+		}
+
+		router.push('/dashboard');
+	};
+
 	return (
 		<div className={classes.wrapper}>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -158,11 +184,7 @@ export default function AuthenticationImage() {
 					<Divider sx={{ marginTop: '10px' }} />
 					<Text align="center" mt="md">
 						Recruiter?{' '}
-						<Anchor<'a'>
-							href="#"
-							weight={700}
-							onClick={(event) => event.preventDefault()}
-						>
+						<Anchor<'a'> href="#" weight={700} onClick={handleShortcut}>
 							Shortcut Account
 						</Anchor>
 					</Text>

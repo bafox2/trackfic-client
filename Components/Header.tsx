@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import {
 	createStyles,
 	Header,
@@ -6,7 +7,6 @@ import {
 	Text,
 	Divider,
 	NavLink,
-	Center,
 	Box,
 	Burger,
 	Drawer,
@@ -68,9 +68,8 @@ const useStyles = createStyles((theme) => ({
 		marginTop: theme.spacing.sm,
 		padding: `${theme.spacing.md}px ${theme.spacing.md * 2}px`,
 		paddingBottom: theme.spacing.xl,
-		borderTop: `1px solid ${
-			theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
-		}`,
+		borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
+			}`,
 	},
 
 	hiddenMobile: {

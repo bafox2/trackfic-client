@@ -65,9 +65,9 @@ const AppLayout: NextPage<{ fallbackData: User }> = ({
 						theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
 					width: '100vw',
 					height: '100vh',
+					paddingLeft: '0 !important',
+					paddingRight: '0 !important',
 				},
-				paddingLeft: '0 !important',
-				paddingRight: '0 !important',
 			})}
 			fixed
 			header={
